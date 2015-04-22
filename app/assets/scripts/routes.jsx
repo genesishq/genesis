@@ -23,8 +23,8 @@ import NotFound from './not-found.jsx';
  * @const routes
  */
 const routes = (
-  <Route name='app' path='/genesis' handler={App}>
-    <DefaultRoute handler={TodoApp} />
+  <Route name='app' path='/' handler={App}>
+    <Route name='genesis/' handler={TodoApp} />
     <NotFoundRoute handler={NotFound} />
   </Route>
 );
