@@ -1,0 +1,14 @@
+var gulp = require('gulp');
+var ghPages = require('gulp-gh-pages');
+var open = require('open');
+var config = require('../config/deploy');
+
+gulp.task('deploy', ['build:production'], deploy);
+
+function deploy() {
+  return gulp.src(config.src)
+    .pipe(ghPages())
+    .on('end', function() {
+      open(config.url);
+    });
+}
