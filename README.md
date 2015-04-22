@@ -1,9 +1,10 @@
 Genesis
 =================
-![genesis](https://cloud.githubusercontent.com/assets/1064654/7274248/84c60792-e8fb-11e4-8626-4e709f901e7f.png)
+![genesis](https://magnus.sexy/genesis/assets/images/banner.png)
 
-> Powerful boilerplate for building advanced web apps, inspired by [gulp-starter](https://github.com/greypants/gulp-starter/tree/2.0).
-Special thanks to [Vincent Klaiber](https://github.com/vinkla/) for the amazing artwork.
+> Powerful boilerplate for building advanced web apps, inspired by [gulp-starter](https://github.com/greypants/gulp-starter/tree/2.0). Special thanks to [Vincent Klaiber](https://github.com/vinkla/) for the amazing artwork.
+> 
+> An example of the generated output can be viewed [here](https://magnus.sexy/genesis). 
 
 #### Includes the following tools, tasks, and workflows:
 
