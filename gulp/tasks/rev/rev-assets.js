@@ -2,7 +2,9 @@ var config = require('../../config');
 var gulp = require('gulp');
 var rev = require('gulp-rev');
 
-gulp.task('rev-assets', function() {
+gulp.task('rev-assets', revAssets);
+
+function revAssets() {
   // Ignore what we dont want to hash in this step
   var ignoreFiles = '!' + config.publicDirectory + '/**/*+(css|js|json|html|ico|txt|map)';
 
@@ -11,4 +13,4 @@ gulp.task('rev-assets', function() {
     .pipe(gulp.dest(config.publicDirectory))
     .pipe(rev.manifest('public/rev-manifest.json', {merge: true}))
     .pipe(gulp.dest(''));
-});
+}
