@@ -5,6 +5,7 @@ var gutil = require('gulp-util');
 var compress = require('compression');
 var logger = require('morgan');
 var open = require('open');
+var spa = require('express-spa');
 
 gulp.task('server', server);
 
@@ -13,13 +14,9 @@ function server() {
 
   var app = express();
 
-  app.use(compress())
-  app.use(logger(config.logLevel))
-  app.use('/', express.static(config.root, config.staticOptions))
-
-  app.get('*', function(req, res) {
-    res.sendFile(config.root + '/index.html');
-  });
+  app.use(compress());
+  app.use(logger(config.logLevel));
+  app.use(spa(config.root + '/index.html'));
 
   app.listen(config.port);
 
