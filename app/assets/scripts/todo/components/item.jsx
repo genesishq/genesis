@@ -40,7 +40,7 @@ export default class Item extends React.Component {
    * @return {object}
    */
   render() {
-    let item = this.props.item;
+    let { item } = this.props;
     let input = null;
 
     if (this.state.isEditing) {

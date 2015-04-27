@@ -38,7 +38,7 @@ export default class Footer extends React.Component {
    * @return {object}
    */
   render() {
-    let allItems = this.props.allItems;
+    let { allItems } = this.props;
     let total = Object.keys(allItems).length;
 
     if (total === 0) {
