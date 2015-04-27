@@ -48,7 +48,7 @@ export default class MainSection extends React.Component {
     const { allItems } = this.props;
     const items = [];
 
-    for (var key in allItems) {
+    for (let key in allItems) {
       items.push(<Item key={key} item={allItems[key]} />);
     }
 

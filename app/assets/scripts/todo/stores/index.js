@@ -37,7 +37,7 @@ const items = {};
  * @return void
  */
 function create(text) {
-  var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+  let id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
   items[id] = {
     id: id,
     complete: false,
@@ -68,7 +68,7 @@ function update(id, updates) {
  * @return void
  */
 function updateAll(updates) {
-  for (var id in items) {
+  for (let id in items) {
     update(id, updates);
   }
 }
@@ -90,7 +90,7 @@ function destroy(id) {
  * @return void
  */
 function destroyCompleted() {
-  for (var id in items) {
+  for (let id in items) {
     if (items[id].complete) {
       destroy(id);
     }
@@ -175,7 +175,7 @@ const Store = Object.assign({}, EventEmitter.prototype, {
    * @return {boolean}
    */
   areAllComplete: function() {
-    for (var id in items) {
+    for (let id in items) {
       if (!items[id].complete) {
         return false;
       }

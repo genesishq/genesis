@@ -55,8 +55,8 @@ class Actions {
    * @return void
    */
   toggleComplete(item) {
-    var id = item.id;
-    var actionType = item.complete ?
+    let { id } = item;
+    let actionType = item.complete ?
         constants.UNDO_COMPLETE :
         constants.COMPLETE;
 
