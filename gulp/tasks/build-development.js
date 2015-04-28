@@ -7,7 +7,7 @@ function build(callback) {
   gulpSequence(
     'clean',
     ['fonts', 'images'],
-    ['sass:development', 'webpack:development', 'static'],
+    ['webpack:development', 'static'],
     ['watch', 'browserSync'],
     callback
   );

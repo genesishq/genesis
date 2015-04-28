@@ -1,3 +1,6 @@
+// require('../styles/app.css');
+require("!style!css!sass!../styles-scss/app.scss");
+
 /*
  * This file is part of a sample todo application.
  *

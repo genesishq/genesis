@@ -1,8 +1,7 @@
 {
   "name": "genesis",
   "dependencies": {
-    "normalize-scss": "~3.0.3",
-    "susy": "~2.2.2"
+    "normalize.css": "~3.0.3"
   },
   "devDependencies": {}
 }
