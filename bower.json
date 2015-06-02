@@ -1,5 +1,8 @@
 {
   "name": "genesis",
+  "version": "1.0.0",
+  "description": "Boilerplate with gulp, webpack, babel and lots of goodies.",
+  "author": "Magnus Bergman <hello@magnus.sexy>",
   "dependencies": {
     "normalize-scss": "~3.0.3",
     "susy": "~2.2.2"

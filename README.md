@@ -3,8 +3,8 @@ Genesis
 ![genesis](https://magnus.sexy/genesis/assets/images/banner.png)
 
 > Powerful boilerplate for building advanced web apps, inspired by [gulp-starter](https://github.com/greypants/gulp-starter/tree/2.0). Special thanks to [Vincent Klaiber](https://github.com/vinkla/) for the amazing artwork.
-> 
-> An example of the generated output can be viewed [here](https://magnus.sexy/genesis). 
+>
+> An example of the generated output can be viewed [here](https://magnus.sexy/genesis).
 
 #### Includes the following tools, tasks, and workflows:
 
@@ -41,55 +41,41 @@ brew install node
 
 Otherwise, you can download and install from [here](http://nodejs.org/download/).
 
-### Install npm dependencies
+### Install npm and bower dependencies
 ```
 npm install
 ```
 
-This runs through all dependencies listed in `package.json` and downloads them to a `node_modules` folder in your project directory.
+This runs through all dependencies listed in `package.json` and `bower.json` and downloads them into `node_modules` and `bower_components` folders in your project directory.
 
-### The `gulp` command
-To run the version of gulp installed local to the project, in the root of your this project, you'd run
-
-```
-./node_modules/.bin/gulp
-```
-
-**WAT.** Why can't I just run `gulp`? Well, you could install gulp globally with `npm install -g gulp`, which will add the gulp script to your global bin folder, but it's always better to use the version that's specified in your project's package.json.  My solution to this is to simply alias `./node_modules/.bin/gulp` to `gulp`. Open up `~/.zshrc` or `~./bashrc` and add the following line:
+### Running build scripts
+If you have gulp installed globally on your machine you can run the tasks with gulp directly, but it's recommended to run gulp locally with the predefined npm scripts.
 
 ```
-alias gulp='node_modules/.bin/gulp'
-```
-Now, running `gulp` in the project directory will use the version specified and installed from the `package.json` file.
-
-### Run gulp and be amazed.
-```
-gulp
+npm run dev
 ```
 
-This will run the `default` gulp task defined in `gulp/tasks/default.js`.
+This will compile your assets with sourcemaps and run a server with browsersync. Check out the `gulp/tasks/build-development.js` file for details.
 
 ### Preview production environment
 ```
-gulp build:production
-gulp server
+npm run build:production
+npm run server
 ```
 
 ### Deploy to GitHub pages
 ```
-gulp deploy
+npm run deploy
 ```
 This will run karma, build your files, revision and compress them, and copy the contents of the public folder to a `gh-pages` branch, and push it up to GitHub. Make sure you've added your project specific configurations to gulp/config/deploy.js before doing this.
 
 ### Testing with Karma
 This repo includes a basic js testing setup with the following: [Karma](http://karma-runner.github.io/0.12/index.html), [Mocha](http://mochajs.org/), [Chai](http://chaijs.com/), and [Sinon](http://sinonjs.org/). There is `karma` gulp task, which the `production` task uses to run the tests before compiling. If any tests fail, the `production` task will abort.
 
-To run the tests and start monitoring files:
+To run the tests simply do:
 ```
-./node_modules/karma/bin/karma start
+npm run test
 ```
-
-Want to just run `karma start`? Either add `alias karma="./node_modules/karma/bin/karma"` to your shell config or install the karma command line interface globally with `npm install -g karma-cli`.
 
 ### Code style
 Depending on which editor you're using this may vary. For sublime, follow the instructions for ESLint [here](https://github.com/roadhump/SublimeLinter-eslint) and for editor config [here](https://github.com/sindresorhus/editorconfig-sublime).

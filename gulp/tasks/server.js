@@ -16,6 +16,7 @@ function server() {
 
   app.use(compress());
   app.use(logger(config.logLevel));
+  app.use(express.static(config.root));
   app.use(spa(config.root + '/index.html'));
 
   app.listen(config.port);
