@@ -1,28 +1,13 @@
-/**
- * Remove this file before writing your own styles,
+/*
+ * This file is part of a sample todo application.
  *
- * This is a bad example on how to organize your sass, place your variables
- * in the base/project/variables file and build your styles in a more
- * component based matter.
+ * (c) Magnus Bergman <hello@magnus.sexy>
  *
- * This is only bunched together to make the example look better and to be
- * removed without too much fuss.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-$bg-color: #2f3545;
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  background: $bg-color;
-  color: $base-color;
-  font-family: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 200;
-}
+@import '~assets/styles/base/__base';
 
 .main {
   max-width: 64em;
@@ -30,6 +15,8 @@ body {
 
   padding-top: 5em;
   padding-bottom: 5em;
+
+  opacity: 1;
 }
 
 .introduction {

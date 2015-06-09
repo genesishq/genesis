@@ -1,7 +1,9 @@
+'use strict';
+
+var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var changed = require('gulp-changed');
 var config = require('../config/fonts');
-var gulp = require('gulp');
 
 gulp.task('fonts', fonts);
 

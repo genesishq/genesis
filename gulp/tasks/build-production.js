@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var gulpSequence = require('gulp-sequence');
 
@@ -9,9 +11,10 @@ function build(callback) {
   gulpSequence(
     'karma',
     'clean',
-    ['fonts', 'images'],
-    ['sass:production', 'webpack:production'],
+    ['fonts', 'images', 'sass:production'],
+    'webpack:production',
     'static',
+    'inject-styles',
     'rev',
     callback
   );

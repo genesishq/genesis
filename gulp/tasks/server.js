@@ -1,11 +1,13 @@
+'use strict';
+
 var gulp = require('gulp');
 var express = require('express');
-var config = require('../config/server');
 var gutil = require('gulp-util');
 var compress = require('compression');
 var logger = require('morgan');
 var open = require('open');
 var spa = require('express-spa');
+var config = require('../config/server');
 
 gulp.task('server', server);
 
