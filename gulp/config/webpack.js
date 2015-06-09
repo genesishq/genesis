@@ -11,7 +11,8 @@ module.exports = function(env) {
 
   var webpackConfig = {
     resolve: {
-      extensions: ['', '.js', '.jsx', 'scss']
+      extensions: ['', '.js', '.jsx', 'scss'],
+      modulesDirectories: ['app', 'node_modules', 'bower_components']
     },
 
     module: {
@@ -21,48 +22,44 @@ module.exports = function(env) {
           loader: 'babel-loader',
           exclude: /(node_modules|bower_components)/
         },
-        // {
-        //   test: /\.css$/,
-        //   // loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'postcss-loader'),
-        //   loader: 'style-loader!css-loader!postcss-loader',
-        //   exclude: /(node_modules|bower_components)/
-        // },
         {
           test: /\.scss$/,
-          loader: ExtractTextPlugin.extract(
-              // activate source maps via loader query
-              'css-loader?sourceMap!' +
-              'sass-loader?sourceMap&outputStyle=expanded&' +
-              'includePaths[]=' +
-                (path.resolve(__dirname, './bower_components')) + '&' +
-              'includePaths[]=' +
-                (path.resolve(__dirname, './node_modules'))
-          )
+          loader:
+            'style!' +
+            'css!' +
+            'postcss-loader!' +
+            'sass?' +
+            'outputStyle=expanded' +
+            '&includePaths[]=' +
+              (path.resolve(__dirname, '../../bower_components')) +
+            '&includePaths[]=' +
+              (path.resolve(__dirname, '../../node_modules'))
+
+          // Write webpack specific styles to a css file.
+          // loader: ExtractTextPlugin.extract(
+          //   // 'style/url!' +
+          //   // 'file!' +
+          //   //   './assets/styles/[name]' +
+          //   //     (env !== 'production' ? '-[hash].' : '.') +
+          //   'css!' + // (env !== 'production' ? '?sourceMap!' : '!') +
+          //   'postcss-loader!' +
+          //   'sass?' + // (env !== 'production' ? '?sourceMap&' : '?') +
+          //   'outputStyle=expanded' +
+          //   '&includePaths[]=' +
+          //     (path.resolve(__dirname, '../../bower_components')) +
+          //   '&includePaths[]=' +
+          //     (path.resolve(__dirname, '../../node_modules'))
+          //  )
         }
       ]
     },
-
-    // postcss: [
-    //   require('postcss-import'), // Resolve imports.
-    //   require('postcss-mixins')({ // Transform mixins (must be done before vars and nested).
-    //     // mixins: require('postcss-neat')() // Add grid mixins.
-    //   }),
-    //   require('postcss-simple-vars'), // Transform vars (must be done before nested).
-    //   require('postcss-color-function'), // Transform color functions.
-    //   require('postcss-simple-extend'), // Transform placeholders.
-    //   require('postcss-media-minmax'), // Transform media queries.
-    //   require('postcss-nested'), // Transform nested selectors.
-    //   require('css-mqpacker'), // Group media queries that are the same.
-    //   require('autoprefixer-core')(config.autoprefixer) // Add vendor prefixes.
-    // ],
-
+    postcss: [],
     plugins: []
   };
 
   if (env !== 'test') {
     webpackConfig.entry = {
-      // app: [config.sourceAssets + '/']
-      app: [config.sourceAssets + '/scripts/index']
+      app: [jsSrc + '/index']
     };
 
     webpackConfig.output = {
@@ -71,11 +68,12 @@ module.exports = function(env) {
       publicPath: publicPath
     };
 
-    // // Factor out common dependencies into a shared.js
+    // Factor out common dependencies into a commons.js
     // webpackConfig.plugins.push(
     //   new webpack.optimize.CommonsChunkPlugin({
-    //     name: 'shared',
+    //     name: 'common',
     //     filename: env === 'production' ? '[name]-[hash].js' : '[name].js',
+    //     minChunks: Infinity
     //   })
     // );
   }
@@ -83,11 +81,19 @@ module.exports = function(env) {
   if (env === 'development') {
     webpackConfig.devtool = 'source-map';
     webpack.debug = true;
-    webpackConfig.plugins.push(new ExtractTextPlugin('../styles/[name].css'));
+    webpackConfig.postcss.push(
+      require('autoprefixer-core')(config.autoprefixer) // Add vendor prefixes.
+    );
+    // Write webpack specific styles to a css file.
+    // webpackConfig.plugins.push(new ExtractTextPlugin('../styles/[name].css'));
   }
 
   if (env === 'production') {
-    // webpackConfig.postcss.push(require('csswring'));
+    webpackConfig.postcss.push(
+      require('css-mqpacker'), // Group media queries that are the same.
+      require('autoprefixer-core')(config.autoprefixer), // Add vendor prefixes.
+      require('csswring') // Minify css
+    );
 
     webpackConfig.plugins.push(
       new webpackManifest(publicPath, 'public'),
@@ -99,6 +105,7 @@ module.exports = function(env) {
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin(),
       new webpack.NoErrorsPlugin()
+      // Write webpack specific styles to a css file.
       // new ExtractTextPlugin('../styles/[name]-[hash].css')
     );
   }

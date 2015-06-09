@@ -9,9 +9,10 @@ function build(callback) {
   gulpSequence(
     'karma',
     'clean',
-    ['fonts', 'images'],
-    ['sass:production', 'webpack:production'],
+    ['fonts', 'images', 'sass:production'],
+    'webpack:production',
     'static',
+    'inject-styles',
     'rev',
     callback
   );

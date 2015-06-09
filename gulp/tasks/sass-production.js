@@ -19,7 +19,7 @@ function sassProduction() {
   ];
 
   return gulp.src(config.src)
-    .pipe(sass(config.settings))
+    .pipe(sass())
     .pipe(postcss(processors))
     .on('error', handleErrors)
     .pipe(gulp.dest(config.dest));
