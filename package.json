@@ -2,6 +2,7 @@
   "name": "genesis",
   "version": "1.0.0",
   "description": "Boilerplate with gulp, webpack, babel and lots of goodies.",
+  "author": "Magnus Bergman <hello@magnus.sexy>",
   "engines": {
     "node": "0.10.36",
     "npm": "2.3.0"
@@ -11,12 +12,13 @@
     "url": "git@bitbucket.org:magnus-bergman/genesis.git"
   },
   "scripts": {
-    "test": "gulp karma",
-    "start": "gulp server",
-    "server": "gulp server",
-    "deploy": "gulp deploy",
-    "dev": "gulp build:development",
-    "prod": "gulp build:production"
+    "postinstall": "./node_modules/.bin/bower install",
+    "test": "./node_modules/.bin/gulp karma",
+    "start": "./node_modules/.bin/gulp server",
+    "server": "./node_modules/.bin/gulp server",
+    "deploy": "./node_modules/.bin/gulp deploy",
+    "dev": "./node_modules/.bin/gulp build:development",
+    "prod": "./node_modules/.bin/gulp build:production"
   },
   "dependencies": {
     "classnames": "^2.1.2",
@@ -81,5 +83,7 @@
     "style-loader": "^0.12.3",
     "vinyl-source-stream": "~1.1.0",
     "webpack": "^1.9.10"
-  }
+  },
+  "private": true,
+  "license": "MIT"
 }
