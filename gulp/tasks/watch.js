@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-var static = require('../config/static');
+var staticDir = require('../config/static');
 var images = require('../config/images');
 var sass = require('../config/sass');
 var fonts = require('../config/fonts');
@@ -12,5 +12,5 @@ function watchTask() {
   gulp.watch(images.src, ['images']);
   gulp.watch(sass.src, ['inject-styles:watch']);
   gulp.watch(fonts.src, ['fonts']);
-  gulp.watch(static.watch, ['static', 'inject-styles']);
+  gulp.watch(staticDir.watch, ['static', 'inject-styles']);
 }

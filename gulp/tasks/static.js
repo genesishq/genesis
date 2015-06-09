@@ -6,9 +6,9 @@ var changed = require('gulp-changed');
 var handleErrors = require('../lib/handleErrors');
 var config = require('../config/static');
 
-gulp.task('static', static);
+gulp.task('static', staticTask);
 
-function static() {
+function staticTask() {
   return gulp.src(config.src, {dot: true})
     .pipe(changed(config.dest))
     .on('error', handleErrors)
