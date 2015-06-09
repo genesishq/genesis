@@ -18,7 +18,12 @@
     "dev": "gulp build:development",
     "prod": "gulp build:production"
   },
-  "dependencies": {},
+  "dependencies": {
+    "classnames": "^2.1.2",
+    "flux": "^2.0.3",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3"
+  },
   "devDependencies": {
     "autoprefixer-core": "^5.2.0",
     "autoprefixer-loader": "^2.0.0",
@@ -29,7 +34,6 @@
     "bower": "^1.4.1",
     "browser-sync": "~2.7.6",
     "browser-sync-spa": "^1.0.2",
-    "classnames": "^2.1.2",
     "compression": "^1.4.4",
     "css-loader": "^0.14.4",
     "css-mqpacker": "^3.1.0",
@@ -40,8 +44,6 @@
     "express": "^4.12.4",
     "express-spa": "0.0.2",
     "extract-text-webpack-plugin": "^0.8.1",
-    "file-loader": "^0.8.4",
-    "flux": "^2.0.3",
     "gulp": "^3.9.0",
     "gulp-changed": "^1.2.1",
     "gulp-filesize": "0.0.6",
@@ -74,8 +76,6 @@
     "postcss": "^4.1.11",
     "postcss-loader": "^0.4.4",
     "pretty-hrtime": "~1.0.0",
-    "react": "^0.13.3",
-    "react-router": "^0.13.3",
     "require-dir": "^0.3.0",
     "sass-loader": "^1.0.2",
     "style-loader": "^0.12.3",
