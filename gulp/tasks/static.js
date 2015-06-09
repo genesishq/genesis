@@ -1,8 +1,10 @@
-var browserSync = require('browser-sync');
-var config = require('../config/static');
+'use strict';
+
 var gulp = require('gulp');
+var browserSync = require('browser-sync');
 var changed = require('gulp-changed');
 var handleErrors = require('../lib/handleErrors');
+var config = require('../config/static');
 
 gulp.task('static', static);
 

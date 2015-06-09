@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var spa = require('browser-sync-spa');

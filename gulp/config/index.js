@@ -1,3 +1,5 @@
+'use strict';
+
 var publicDirectory = './public';
 var sourceDirectory = './app';
 var publicAssets = publicDirectory + '/assets';

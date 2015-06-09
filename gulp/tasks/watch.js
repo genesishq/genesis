@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var static = require('../config/static');
 var images = require('../config/images');

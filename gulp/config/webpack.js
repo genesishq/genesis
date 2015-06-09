@@ -1,8 +1,10 @@
-var config = require('./');
+'use strict';
+
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpackManifest = require('../lib/webpackManifest');
+var config = require('./');
 
 module.exports = function(env) {
   var jsSrc = config.sourceAssets + '/scripts/';
@@ -34,22 +36,6 @@ module.exports = function(env) {
               (path.resolve(__dirname, '../../bower_components')) +
             '&includePaths[]=' +
               (path.resolve(__dirname, '../../node_modules'))
-
-          // Write webpack specific styles to a css file.
-          // loader: ExtractTextPlugin.extract(
-          //   // 'style/url!' +
-          //   // 'file!' +
-          //   //   './assets/styles/[name]' +
-          //   //     (env !== 'production' ? '-[hash].' : '.') +
-          //   'css!' + // (env !== 'production' ? '?sourceMap!' : '!') +
-          //   'postcss-loader!' +
-          //   'sass?' + // (env !== 'production' ? '?sourceMap&' : '?') +
-          //   'outputStyle=expanded' +
-          //   '&includePaths[]=' +
-          //     (path.resolve(__dirname, '../../bower_components')) +
-          //   '&includePaths[]=' +
-          //     (path.resolve(__dirname, '../../node_modules'))
-          //  )
         }
       ]
     },
@@ -84,8 +70,6 @@ module.exports = function(env) {
     webpackConfig.postcss.push(
       require('autoprefixer-core')(config.autoprefixer) // Add vendor prefixes.
     );
-    // Write webpack specific styles to a css file.
-    // webpackConfig.plugins.push(new ExtractTextPlugin('../styles/[name].css'));
   }
 
   if (env === 'production') {
@@ -105,8 +89,6 @@ module.exports = function(env) {
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin(),
       new webpack.NoErrorsPlugin()
-      // Write webpack specific styles to a css file.
-      // new ExtractTextPlugin('../styles/[name]-[hash].css')
     );
   }
 

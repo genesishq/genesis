@@ -1,3 +1,5 @@
+'use strict';
+
 // If you are familiar with Rails, this task the equivalent of `rake assets:precompile`
 var gulp = require('gulp');
 var gulpSequence = require('gulp-sequence');

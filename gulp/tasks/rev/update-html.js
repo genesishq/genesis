@@ -1,6 +1,8 @@
+'use strict';
+
 var gulp = require('gulp');
-var config = require('../../config');
 var revReplace = require('gulp-rev-replace');
+var config = require('../../config');
 
 gulp.task('update-html', updateHtml);
 

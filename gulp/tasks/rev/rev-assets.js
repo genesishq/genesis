@@ -1,6 +1,8 @@
-var config = require('../../config');
+'use strict';
+
 var gulp = require('gulp');
 var rev = require('gulp-rev');
+var config = require('../../config');
 
 gulp.task('rev-assets', revAssets);
 

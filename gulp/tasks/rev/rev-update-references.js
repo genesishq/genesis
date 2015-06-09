@@ -1,6 +1,8 @@
-var config = require('../../config');
+'use strict';
+
 var gulp = require('gulp');
 var revReplace = require('gulp-rev-replace');
+var config = require('../../config');
 
 gulp.task('rev-update-references', revUpdateReferences);
 

@@ -1,8 +1,10 @@
-var config = require('../config/webpack')('development');
+'use strict';
+
 var gulp = require('gulp');
 var logger = require('../lib/compileLogger');
 var webpack = require('webpack');
 var browserSync = require('browser-sync');
+var config = require('../config/webpack')('development');
 
 gulp.task('webpack:development', webpackDevelopment);
 

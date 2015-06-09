@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var styleInject = require('gulp-style-inject');
 var browserSync = require('browser-sync');
