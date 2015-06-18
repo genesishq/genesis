@@ -34,7 +34,7 @@ class Actions {
   /**
    * Update item.
    *
-   * @param {string} id
+   * @param {number} id
    * @param {string} text
    *
    * @return void
@@ -55,10 +55,8 @@ class Actions {
    * @return void
    */
   toggleComplete(item) {
-    let { id } = item;
-    let actionType = item.complete ?
-        constants.UNDO_COMPLETE :
-        constants.COMPLETE;
+    const { id } = item;
+    const actionType = item.complete ? constants.UNDO_COMPLETE : constants.COMPLETE;
 
     dispatcher.dispatch({
       actionType: actionType,
@@ -80,7 +78,7 @@ class Actions {
   /**
    * Destroy item.
    *
-   * @param  {string} id
+   * @param {number} id
    *
    * @return void
    */

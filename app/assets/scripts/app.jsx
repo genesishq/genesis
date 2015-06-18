@@ -8,14 +8,19 @@
  */
 
 import React from 'react';
-import {RouteHandler} from 'react-router';
+import { RouteHandler } from 'react-router';
+
+/**
+ * @const Component
+ */
+const { Component } = React;
 
 /**
  * This is the App component class.
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-export default class App extends React.Component {
+export default class App extends Component {
 
   /**
    * Render react component.

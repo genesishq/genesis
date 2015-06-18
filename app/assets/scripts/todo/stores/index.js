@@ -37,7 +37,8 @@ const items = {};
  * @return void
  */
 function create(text) {
-  let id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+  const id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
+
   items[id] = {
     id: id,
     complete: false,
@@ -48,9 +49,8 @@ function create(text) {
 /**
  * Update an item.
  *
- * @param {string} id
- * @param {object} updates An object literal containing only the data to be
- *     updated.
+ * @param {number} id
+ * @param {object} updates An object literal containing only the data to be updated.
  *
  * @return void
  */
@@ -62,14 +62,15 @@ function update(id, updates) {
  * Update all of the items with the same object.
  * the data to be updated. Used to mark all items as completed.
  *
- * @param  {object} updates An object literal containing only the data to be
- *     updated.
+ * @param {object} updates An object literal containing only the data to be updated.
  *
  * @return void
  */
 function updateAll(updates) {
   for (let id in items) {
-    update(id, updates);
+    if (items.hasOwnProperty(id)) {
+      update(id, updates);
+    }
   }
 }
 
@@ -91,11 +92,72 @@ function destroy(id) {
  */
 function destroyCompleted() {
   for (let id in items) {
-    if (items[id].complete) {
+    if (items.hasOwnProperty(id) && items[id].complete) {
       destroy(id);
     }
   }
 }
+
+/**
+ * This is the Store object.
+ * It acts as a singleton with methods handle items.
+ */
+const Store = Object.assign({}, EventEmitter.prototype, {
+
+  /**
+   * Tests whether all the remaining items are marked as completed.
+   *
+   * @return {boolean}
+   */
+  areAllComplete() {
+    for (let id in items) {
+      if (items.hasOwnProperty(id) && !items[id].complete) {
+        return false;
+      }
+    }
+    return true;
+  },
+
+  /**
+   * Get the entire collection.
+   *
+   * @return {object}
+   */
+  getAll() {
+    return items;
+  },
+
+  /**
+   * Emit a change event to update the state of each listener.
+   *
+   * @return void
+   */
+  emitChange() {
+    this.emit(CHANGE_EVENT);
+  },
+
+  /**
+   * Add listener to the change event.
+   *
+   * @param {function} callback
+   *
+   * @return void
+   */
+  addChangeListener(callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
+
+  /**
+   * Remove listener from listening to the change event.
+   *
+   * @param {function} callback
+   *
+   * @return void
+   */
+  removeChangeListener(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  }
+});
 
 /**
  * Actions handler that deals with all actions depending on type.
@@ -107,7 +169,7 @@ function destroyCompleted() {
 function actionsHandler(action) {
   let text = null;
 
-  switch(action.actionType) {
+  switch (action.actionType) {
     case constants.CREATE:
       text = action.text.trim();
       if (text !== '') {
@@ -162,66 +224,5 @@ function actionsHandler(action) {
  * Register actions handler to the dispatcher.
  */
 dispatcher.register(actionsHandler);
-
-/**
- * This is the Store object.
- * It acts as a singleton with methods handle items.
- */
-const Store = Object.assign({}, EventEmitter.prototype, {
-
-  /**
-   * Tests whether all the remaining items are marked as completed.
-   *
-   * @return {boolean}
-   */
-  areAllComplete: function() {
-    for (let id in items) {
-      if (!items[id].complete) {
-        return false;
-      }
-    }
-    return true;
-  },
-
-  /**
-   * Get the entire collection.
-   *
-   * @return {object}
-   */
-  getAll: function() {
-    return items;
-  },
-
-  /**
-   * Emit a change event to update the state of each listener.
-   *
-   * @return void
-   */
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
-  },
-
-  /**
-   * Add listener to the change event.
-   *
-   * @param {function} callback
-   *
-   * @return void
-   */
-  addChangeListener: function(callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  /**
-   * Remove listener from listening to the change event.
-   *
-   * @param {function} callback
-   *
-   * @return void
-   */
-  removeChangeListener: function(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
-  }
-});
 
 export default Store;

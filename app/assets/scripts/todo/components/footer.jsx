@@ -8,14 +8,22 @@
  */
 
 import React from 'react';
+
 import Actions from '../actions/';
 
 /**
- * This is the Footer component class.
- *
- * @author Magnus Bergman <hello@magnus.sexy>
+ * @const Component
+ * @const PropTypes
  */
-export default class Footer extends React.Component {
+const {
+  Component,
+  PropTypes
+} = React;
+
+/**
+ * This is the Footer component class.
+ */
+export default class Footer extends Component {
 
   /**
    * Initiate and set state for the component.
@@ -38,43 +46,42 @@ export default class Footer extends React.Component {
    * @return {object}
    */
   render() {
-    let { allItems } = this.props;
-    let total = Object.keys(allItems).length;
+    const { allItems } = this.props;
+    const total = Object.keys(allItems).length;
 
     if (total === 0) {
       return null;
     }
 
     let completed = 0;
+
     for (let key in allItems) {
-      if (allItems[key].complete) {
+      if (allItems.hasOwnProperty(key) && allItems[key].complete) {
         completed++;
       }
     }
 
-    let itemsLeft = total - completed;
-    let itemsLeftPhrase = itemsLeft === 1 ? ' item ' : ' items ';
-    itemsLeftPhrase += 'left';
+    const itemsLeft = total - completed;
 
     let clearCompletedButton = null;
 
-    if (completed) {
-      clearCompletedButton =
+    if (completed > 0) {
+      clearCompletedButton = (
         <button
           className="clear-completed"
           onClick={this.onClearCompletedClick.bind(this)}>
           Clear completed ({completed})
-        </button>;
+        </button>
+      );
     }
 
     return (
       <footer className="footer">
-        <p><small>Double click a todo to edit its content.</small></p>
+        <p>
+          <small>Double click a todo to edit its content.</small>
+        </p>
         <span className="item-count">
-          <strong>
-            {itemsLeft}
-          </strong>
-          {itemsLeftPhrase}
+          <strong>{itemsLeft}</strong> {itemsLeft > 1 ? 'items' : 'item'} left
         </span>
         {clearCompletedButton}
       </footer>
@@ -92,7 +99,7 @@ export default class Footer extends React.Component {
 }
 
 Footer.propTypes = {
-  allItems: React.PropTypes.object.isRequired
+  allItems: PropTypes.object.isRequired
 };
 
 Footer.defaultProps = {

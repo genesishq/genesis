@@ -8,15 +8,24 @@
  */
 
 import React from 'react';
-import TextInput from './text-input.jsx';
+
 import Actions from '../actions/';
+
+import TextInput from './text-input.jsx';
+
+/**
+ * @const Component
+ * @const PropTypes
+ */
+const {
+  Component,
+  PropTypes
+} = React;
 
 /**
  * This is the Header component class.
- *
- * @author Magnus Bergman <hello@magnus.sexy>
  */
-export default class Header extends React.Component {
+export default class Header extends Component {
 
   /**
    * Render react component.
@@ -44,7 +53,7 @@ export default class Header extends React.Component {
    * @return void
    */
   onSave(text) {
-    if (text.trim()){
+    if (text.trim()) {
       Actions.create(text);
     }
   }

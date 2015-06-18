@@ -10,11 +10,16 @@
 import React from 'react';
 
 /**
+ * @const Component
+ */
+const { Component } = React;
+
+/**
  * This is the NotFound component class.
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-export default class NotFound extends React.Component {
+export default class NotFound extends Component {
 
   /**
    * Render react component.

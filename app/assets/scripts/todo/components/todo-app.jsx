@@ -8,10 +8,17 @@
  */
 
 import React from 'react';
+
+import Store from '../stores';
+
 import Header from './header.jsx';
 import MainSection from './main-section.jsx';
 import Footer from './footer.jsx';
-import Store from '../stores';
+
+/**
+ * @const Component
+ */
+const { Component } = React;
 
 /**
  * Retrieve the current item data from the Store.
@@ -31,7 +38,7 @@ function getState() {
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-export default class TodoApp extends React.Component {
+export default class TodoApp extends Component {
 
   /**
    * Initiate and set state for the component.

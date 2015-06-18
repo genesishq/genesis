@@ -11,7 +11,18 @@ require('./todo/todo-app.scss');
 
 import React from 'react';
 import Router from 'react-router';
+
 import routes from './routes.jsx';
+
+/**
+ * @const render
+ */
+const { render } = React;
+
+/**
+ * @const run
+ */
+const { run } = Router;
 
 /**
  * This is the application index file.
@@ -27,7 +38,7 @@ const todoApp = document.getElementById('todo-app');
 /**
  * Initiate the react app with react-router.
  */
-Router.run(routes, Router.HistoryLocation, render);
+run(routes, Router.HistoryLocation, bootstrap);
 
 /**
  * Render the correct app with handler returned from react-router.
@@ -36,6 +47,6 @@ Router.run(routes, Router.HistoryLocation, render);
  *
  * @return void
  */
-function render(Handler) {
-  React.render(<Handler/>, todoApp);
+function bootstrap(Handler) {
+  render(<Handler/>, todoApp);
 }

@@ -10,16 +10,23 @@
 import React from 'react';
 
 /**
+ * @const Component
+ * @const PropTypes
+ */
+const {
+  Component,
+  PropTypes
+} = React;
+
+/**
  * @const ENTER_KEY_CODE
  */
 const ENTER_KEY_CODE = 13;
 
 /**
  * This is the TextInput component class.
- *
- * @author Magnus Bergman <hello@magnus.sexy>
  */
-export default class TextInput extends React.Component {
+export default class TextInput extends Component {
 
   /**
    * Initiate and set state for the component.
@@ -42,15 +49,21 @@ export default class TextInput extends React.Component {
    * @return {object}
    */
   render() {
+    const {
+      className,
+      placeholder
+    } = this.props;
+
+    const { value } = this.state;
+
     return (
       <input
-        className={this.props.className}
-        id={this.props.id}
-        placeholder={this.props.placeholder}
+        className={className}
+        placeholder={placeholder}
         onBlur={this.save.bind(this)}
         onChange={this.onChange.bind(this)}
         onKeyDown={this.onKeyDown.bind(this)}
-        value={this.state.value}
+        value={value}
         autoFocus={true}
       />
     );
@@ -62,7 +75,11 @@ export default class TextInput extends React.Component {
    * @return void
    */
   save() {
-    this.props.onSave(this.state.value);
+    const { value } = this.state;
+    const { onSave } = this.props;
+
+    onSave(value);
+
     this.setState({
       value: ''
     });
@@ -98,11 +115,10 @@ export default class TextInput extends React.Component {
 }
 
 TextInput.propTypes = {
-  className: React.PropTypes.string,
-  id: React.PropTypes.string,
-  placeholder: React.PropTypes.string,
-  onSave: React.PropTypes.func.isRequired,
-  value: React.PropTypes.string
+  className: PropTypes.string,
+  placeholder: PropTypes.string,
+  onSave: PropTypes.func.isRequired,
+  value: PropTypes.string
 };
 
 TextInput.defaultProps = {

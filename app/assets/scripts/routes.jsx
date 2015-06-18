@@ -8,7 +8,13 @@
  */
 
 import React from 'react';
-import {Route, DefaultRoute, NotFoundRoute} from 'react-router';
+
+import {
+  Route,
+  DefaultRoute,
+  NotFoundRoute
+} from 'react-router';
+
 import App from './app.jsx';
 import TodoApp from './todo/components/todo-app.jsx';
 import NotFound from './not-found.jsx';

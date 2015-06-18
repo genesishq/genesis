@@ -8,16 +8,25 @@
  */
 
 import React from 'react';
-import TextInput from './text-input.jsx';
-import Actions from '../actions/';
 import classNames from 'classnames';
+
+import Actions from '../actions/';
+
+import TextInput from './text-input.jsx';
+
+/**
+ * @const Component
+ * @const PropTypes
+ */
+const {
+  Component,
+  PropTypes
+} = React;
 
 /**
  * This is the Item component class.
- *
- * @author Magnus Bergman <hello@magnus.sexy>
  */
-export default class Item extends React.Component {
+export default class Item extends Component {
 
   /**
    * Initiate and set state for the component.
@@ -40,25 +49,27 @@ export default class Item extends React.Component {
    * @return {object}
    */
   render() {
-    let { item } = this.props;
+    const { item } = this.props;
+    const { isEditing } = this.state;
+
     let input = null;
 
-    if (this.state.isEditing) {
-      input =
+    if (isEditing) {
+      input = (
         <TextInput
           className="edit"
           onSave={this.onSave.bind(this)}
-          value={item.text}
-        />;
+          value={item.text} />
+      );
     }
 
     return (
       <li
+        key={item.id}
         className={classNames({
           'completed': item.complete,
-          'editing': this.state.isEditing
-        })}
-        key={item.id}>
+          'editing': isEditing
+        })}>
         <div className="view">
           <label className="checkbox-label">
             <input
@@ -80,7 +91,9 @@ export default class Item extends React.Component {
   }
 
   onToggleComplete() {
-    Actions.toggleComplete(this.props.item);
+    const { item } = this.props;
+
+    Actions.toggleComplete(item);
   }
 
   onDoubleClick() {
@@ -94,19 +107,34 @@ export default class Item extends React.Component {
    * @param  {string} text
    */
   onSave(text) {
-    Actions.updateText(this.props.item.id, text);
+    const { id } = this.props.item;
+
+    Actions.updateText(id, text);
+
     this.setState({isEditing: false});
   }
 
   onDestroyClick() {
-    Actions.destroy(this.props.item.id);
+    const { id } = this.props.item;
+
+    Actions.destroy(id);
   }
 }
 
 Item.propTypes = {
-  isEditing: React.PropTypes.bool
+  item: PropTypes.shape({
+    id: PropTypes.string,
+    text: PropTypes.string,
+    complete: PropTypes.bool
+  }),
+  isEditing: PropTypes.bool
 };
 
 Item.defaultProps = {
+  item: {
+    id: '',
+    text: '',
+    complete: false
+  },
   isEditing: false
 };
