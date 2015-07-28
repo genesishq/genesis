@@ -28,6 +28,16 @@ const {
 export default class MainSection extends Component {
 
   /**
+   * Declare component property types.
+   *
+   * @type {Object}
+   */
+  static propTypes = {
+    allItems: PropTypes.object.isRequired,
+    areAllComplete: PropTypes.bool.isRequired
+  };
+
+  /**
    * Initiate and set state for the component.
    *
    * @param {object} props
@@ -92,13 +102,3 @@ export default class MainSection extends Component {
     Actions.toggleCompleteAll();
   }
 }
-
-MainSection.propTypes = {
-  allItems: PropTypes.object.isRequired,
-  areAllComplete: PropTypes.bool.isRequired
-};
-
-MainSection.defaultProps = {
-  allItems: {},
-  areAllComplete: false
-};

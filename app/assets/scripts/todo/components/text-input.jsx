@@ -29,6 +29,29 @@ const ENTER_KEY_CODE = 13;
 export default class TextInput extends Component {
 
   /**
+   * Declare component property types.
+   *
+   * @type {Object}
+   */
+  static propTypes = {
+    className: PropTypes.string,
+    placeholder: PropTypes.string,
+    onSave: PropTypes.func.isRequired,
+    value: PropTypes.string
+  };
+
+  /**
+   * Set default values for component properties.
+   *
+   * @type {Object}
+   */
+  static defaultProps = {
+    className: '',
+    placeholder: '',
+    value: ''
+  };
+
+  /**
    * Initiate and set state for the component.
    *
    * @param {object} props
@@ -113,14 +136,3 @@ export default class TextInput extends Component {
     }
   }
 }
-
-TextInput.propTypes = {
-  className: PropTypes.string,
-  placeholder: PropTypes.string,
-  onSave: PropTypes.func.isRequired,
-  value: PropTypes.string
-};
-
-TextInput.defaultProps = {
-  value: ''
-};

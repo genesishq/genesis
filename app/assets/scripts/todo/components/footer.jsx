@@ -26,6 +26,15 @@ const {
 export default class Footer extends Component {
 
   /**
+   * Declare component property types.
+   *
+   * @type {Object}
+   */
+  static propTypes = {
+    allItems: PropTypes.object.isRequired
+  };
+
+  /**
    * Initiate and set state for the component.
    *
    * @param {object} props
@@ -97,11 +106,3 @@ export default class Footer extends Component {
     Actions.destroyCompleted();
   }
 }
-
-Footer.propTypes = {
-  allItems: PropTypes.object.isRequired
-};
-
-Footer.defaultProps = {
-  allItems: {}
-};

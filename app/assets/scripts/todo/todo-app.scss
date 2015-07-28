@@ -7,11 +7,11 @@
  * file that was distributed with this source code.
  */
 
-@import '~assets/styles/base/__base';
+@import '~base/__base';
 
 .todo-app {
   opacity: 1;
-  
+
   padding: 0 20%;
 
   @media (max-width: 56em) { padding: 0 15%; }

@@ -29,6 +29,34 @@ const {
 export default class Item extends Component {
 
   /**
+   * Declare component property types.
+   *
+   * @type {Object}
+   */
+  static propTypes = {
+    item: PropTypes.shape({
+      id: PropTypes.string,
+      text: PropTypes.string,
+      complete: PropTypes.bool
+    }),
+    isEditing: PropTypes.bool
+  };
+
+  /**
+   * Set default values for component properties.
+   *
+   * @type {Object}
+   */
+  static defaultProps = {
+    item: {
+      id: '',
+      text: '',
+      complete: false
+    },
+    isEditing: false
+  };
+
+  /**
    * Initiate and set state for the component.
    *
    * @param {object} props
@@ -120,21 +148,3 @@ export default class Item extends Component {
     Actions.destroy(id);
   }
 }
-
-Item.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.string,
-    text: PropTypes.string,
-    complete: PropTypes.bool
-  }),
-  isEditing: PropTypes.bool
-};
-
-Item.defaultProps = {
-  item: {
-    id: '',
-    text: '',
-    complete: false
-  },
-  isEditing: false
-};

@@ -14,7 +14,7 @@ module.exports = function(env) {
   var webpackConfig = {
     resolve: {
       extensions: ['', '.js', '.jsx', 'scss'],
-      modulesDirectories: ['app', 'node_modules', 'bower_components']
+      modulesDirectories: ['app/assets/styles', 'node_modules', 'bower_components']
     },
 
     module: {
@@ -33,9 +33,12 @@ module.exports = function(env) {
             'sass?' +
             'outputStyle=expanded' +
             '&includePaths[]=' +
-              (path.resolve(__dirname, '../../bower_components')) +
-            '&includePaths[]=' +
-              (path.resolve(__dirname, '../../node_modules'))
+              path.resolve(
+                __dirname,
+                '../../bower_components',
+                '../../node_modules',
+                '../../app/assets/styles'
+              )
         }
       ]
     },

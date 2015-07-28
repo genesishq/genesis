@@ -18,8 +18,7 @@ import TextInput from './text-input.jsx';
  * @const PropTypes
  */
 const {
-  Component,
-  PropTypes
+  Component
 } = React;
 
 /**
