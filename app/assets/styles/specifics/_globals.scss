@@ -1,11 +1,9 @@
-*, *:before, *:after { box-sizing: border-box; }
-
 html,
 body {
   width: 100%;
   height: 100%;
 }
 
-body {
-  background: $bg-color;
-}
+body { background: $color-bg; }
+
+*:focus { outline: 0; }

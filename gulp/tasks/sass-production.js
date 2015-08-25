@@ -1,20 +1,16 @@
-'use strict';
+import gulp from 'gulp';
+import browserSync from 'browser-sync';
+import sass from 'gulp-sass';
+import sourcemaps from 'gulp-sourcemaps';
+import postcss from 'gulp-postcss';
+import autoprefixer from 'autoprefixer-core';
+import mqpacker from 'css-mqpacker';
+import csswring from 'csswring';
+import handleErrors from '../lib/handleErrors';
+import config from '../config/sass';
 
-var gulp = require('gulp');
-var browserSync = require('browser-sync');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var postcss = require('gulp-postcss');
-var autoprefixer = require('autoprefixer-core');
-var mqpacker = require('css-mqpacker');
-var csswring = require('csswring');
-var handleErrors = require('../lib/handleErrors');
-var config = require('../config/sass');
-
-gulp.task('sass:production', sassProduction);
-
-function sassProduction() {
-  var processors = [
+gulp.task('sass:production', () => {
+  const processors = [
     autoprefixer(config.autoprefixer),
     mqpacker,
     csswring
@@ -22,7 +18,7 @@ function sassProduction() {
 
   return gulp.src(config.src)
     .pipe(sass())
-    .pipe(postcss(processors))
     .on('error', handleErrors)
+    .pipe(postcss(processors))
     .pipe(gulp.dest(config.dest));
-}
+});

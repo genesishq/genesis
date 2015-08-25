@@ -1,11 +1,7 @@
-'use strict';
+import gulp from 'gulp';
+import gulpSequence from 'gulp-sequence';
 
-var gulp = require('gulp');
-var gulpSequence = require('gulp-sequence');
-
-gulp.task('build:development', build);
-
-function build(callback) {
+gulp.task('build:development', callback => {
   gulpSequence(
     'clean',
     ['fonts', 'images', 'sass:development'],
@@ -15,4 +11,4 @@ function build(callback) {
     ['watch', 'browserSync'],
     callback
   );
-}
+});

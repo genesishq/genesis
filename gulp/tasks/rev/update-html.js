@@ -1,15 +1,11 @@
-'use strict';
+import gulp from 'gulp';
+import revReplace from 'gulp-rev-replace';
+import config from '../../config';
 
-var gulp = require('gulp');
-var revReplace = require('gulp-rev-replace');
-var config = require('../../config');
-
-gulp.task('update-html', updateHtml);
-
-function updateHtml() {
-  var manifest = gulp.src(config.publicDirectory + "/rev-manifest.json");
+gulp.task('update-html', () => {
+  const manifest = gulp.src(config.publicDirectory + "/rev-manifest.json");
 
   return gulp.src(config.publicDirectory + '/**/*.html')
     .pipe(revReplace({manifest: manifest}))
     .pipe(gulp.dest(config.publicDirectory));
-}
+});

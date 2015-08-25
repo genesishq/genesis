@@ -1,9 +1,6 @@
-'use strict';
+import config from './';
 
-var config = require('./');
-
-module.exports = {
-  watch: config.sourceDirectory + '/static/**',
-  src: [config.sourceDirectory + '/static/**'],
+export default {
+  src: [config.sourceDirectory + '/**', '!' + config.sourceAssets],
   dest: config.publicDirectory
 };

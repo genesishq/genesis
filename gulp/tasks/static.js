@@ -1,17 +1,13 @@
-'use strict';
+import gulp from 'gulp';
+import browserSync from 'browser-sync';
+import changed from 'gulp-changed';
+import handleErrors from '../lib/handleErrors';
+import config from '../config/static';
 
-var gulp = require('gulp');
-var browserSync = require('browser-sync');
-var changed = require('gulp-changed');
-var handleErrors = require('../lib/handleErrors');
-var config = require('../config/static');
-
-gulp.task('static', staticTask);
-
-function staticTask() {
+gulp.task('static', () => {
   return gulp.src(config.src, {dot: true})
     .pipe(changed(config.dest))
     .on('error', handleErrors)
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({stream: true}));
-}
+});

@@ -1,23 +1,20 @@
-'use strict';
+import gulp from 'gulp';
+import logger from '../lib/compileLogger';
+import webpack from 'webpack';
+import browserSync from 'browser-sync';
+import config from '../config/webpack';
 
-var gulp = require('gulp');
-var logger = require('../lib/compileLogger');
-var webpack = require('webpack');
-var browserSync = require('browser-sync');
-var config = require('../config/webpack')('development');
+gulp.task('webpack:development', callback => {
+  let built = false;
 
-gulp.task('webpack:development', webpackDevelopment);
-
-function webpackDevelopment(callback) {
-  var built = false;
-
-  webpack(config).watch(200, function(err, stats) {
-    logger(err, stats);
-    browserSync.reload();
-    // On the initial compile, let gulp know the task is done
-    if (!built) {
-      built = true;
-      callback();
-    }
-  });
-}
+  webpack(config('development'))
+    .watch(200, (err, stats) => {
+      // logger(err, stats);
+      browserSync.reload();
+      // On the initial compile, let gulp know the task is done
+      if (!built) {
+        built = true;
+        callback();
+      }
+    });
+});

@@ -1,8 +1,6 @@
-'use strict';
+import config from './';
 
-var config = require('./');
-
-module.exports = {
+export default {
   url: 'https://magnus-bergman.github.io/genesis/',
   src: config.publicDirectory + '/**/*'
 };

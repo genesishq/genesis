@@ -1,15 +1,11 @@
-'use strict';
+import gulp from 'gulp';
+import styleInject from 'gulp-style-inject';
+import handleErrors from '../lib/handleErrors';
+import config from '../config';
 
-var gulp = require('gulp');
-var styleInject = require('gulp-style-inject');
-var handleErrors = require('../lib/handleErrors');
-var config = require('../config');
-
-gulp.task('inject-styles', injectStyles);
-
-function injectStyles() {
-  return gulp.src(config.sourceDirectory + '/static/index.html')
+gulp.task('inject-styles', () => {
+  return gulp.src(config.sourceDirectory + '/index.html')
     .on('error', handleErrors)
     .pipe(styleInject())
     .pipe(gulp.dest(config.publicDirectory));
-}
+});

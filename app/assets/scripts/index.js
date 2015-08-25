@@ -1,5 +1,3 @@
-require('./todo/todo-app.scss');
-
 /*
  * This file is part of a sample todo application.
  *

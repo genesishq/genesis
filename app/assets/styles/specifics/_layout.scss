@@ -4,8 +4,6 @@
 
   padding-top: 5em;
   padding-bottom: 5em;
-
-  opacity: 1;
 }
 
 .introduction {
@@ -13,27 +11,18 @@
 
   @media (max-width: 32em) { padding: 0 1em; }
 
-  h1 {
-    margin-top: 0;
-
-    font-size: 4em;
-    font-weight: 100;
-  }
-
   .logo {
     width: 4.375em;
     height: auto;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto -1.6em;
   }
+
+  &,
+  header { margin-bottom: 2em; }
 }
 
-.todo-app {
-  opacity: 0;
-  transition: opacity 400ms $easeOutQuad;
-}
-
-footer {
+.footer {
   margin-top: 2em;
   text-align: center;
 }

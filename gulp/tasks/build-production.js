@@ -1,11 +1,7 @@
-'use strict';
+import gulp from 'gulp';
+import gulpSequence from 'gulp-sequence';
 
-var gulp = require('gulp');
-var gulpSequence = require('gulp-sequence');
-
-gulp.task('build:production', build);
-
-function build(callback) {
+gulp.task('build:production', callback => {
   process.env.NODE_ENV = 'production';
 
   gulpSequence(
@@ -18,4 +14,4 @@ function build(callback) {
     'rev',
     callback
   );
-}
+});

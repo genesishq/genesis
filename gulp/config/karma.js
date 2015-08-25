@@ -1,8 +1,13 @@
-'use strict';
+import webpackConfig from './webpack';
 
-var webpackConfig = require('./webpack')('test');
+import karmaWebpack from 'karma-webpack';
+import karmaMocha from 'karma-mocha';
+import karmaSinonChai from 'karma-sinon-chai';
+import karmaChromeLauncher from 'karma-chrome-launcher';
+import karmaFirefoxLauncher from 'karma-firefox-launcher';
+import karmaNyanReporter from 'karma-nyan-reporter';
 
-module.exports = {
+export default {
   basePath: '.',
   frameworks: ['mocha', 'sinon-chai'],
   files: [
@@ -11,16 +16,16 @@ module.exports = {
   preprocessors: {
     'app/assets/scripts/**/__tests__/*': ['webpack']
   },
-  webpack: webpackConfig,
+  webpack: webpackConfig('test'),
   singleRun: process.env.TRAVIS_CI === 'true',
   browsers: [(process.env.TRAVIS_CI === 'true' ? 'Firefox' : 'Chrome')],
   reporters: ['nyan'],
   plugins: [
-    require('karma-webpack'),
-    require('karma-mocha'),
-    require('karma-sinon-chai'),
-    require('karma-chrome-launcher'),
-    require('karma-firefox-launcher'),
-    require('karma-nyan-reporter')
+    karmaWebpack,
+    karmaMocha,
+    karmaSinonChai,
+    karmaChromeLauncher,
+    karmaFirefoxLauncher,
+    karmaNyanReporter
   ]
 };

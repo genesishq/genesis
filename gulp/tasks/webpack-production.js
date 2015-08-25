@@ -1,15 +1,11 @@
-'use strict';
+import gulp from 'gulp';
+import logger from '../lib/compileLogger';
+import webpack from 'webpack';
+import config from '../config/webpack';
 
-var gulp = require('gulp');
-var logger = require('../lib/compileLogger');
-var webpack = require('webpack');
-var config = require('../config/webpack')('production');
-
-gulp.task('webpack:production', webpackProduction);
-
-function webpackProduction(callback) {
-  webpack(config, function(err, stats) {
+gulp.task('webpack:production', callback => {
+  webpack(config('production'), (err, stats) => {
     logger(err, stats);
     callback();
   });
-}
+});

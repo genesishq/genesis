@@ -1,16 +1,12 @@
-'use strict';
+import gulp from 'gulp';
+import staticDir from '../config/static';
+import images from '../config/images';
+import sass from '../config/sass';
+import fonts from '../config/fonts';
 
-var gulp = require('gulp');
-var staticDir = require('../config/static');
-var images = require('../config/images');
-var sass = require('../config/sass');
-var fonts = require('../config/fonts');
-
-gulp.task('watch', ['browserSync'], watchTask);
-
-function watchTask() {
+gulp.task('watch', ['browserSync'], () => {
   gulp.watch(images.src, ['images']);
   gulp.watch(sass.src, ['inject-styles:watch']);
   gulp.watch(fonts.src, ['fonts']);
-  gulp.watch(staticDir.watch, ['static', 'inject-styles']);
-}
+  gulp.watch(staticDir.src, ['static', 'inject-styles']);
+});

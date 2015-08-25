@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import Radium from 'radium';
 
 import Actions from '../actions/';
 
@@ -24,6 +25,7 @@ const {
 /**
  * This is the Header component class.
  */
+@Radium
 export default class Header extends Component {
 
   /**
@@ -33,10 +35,9 @@ export default class Header extends Component {
    */
   render() {
     return (
-      <header className="header">
-        <h2>Todo</h2>
+      <header>
+        <h2 style={styles.heading}>Todo</h2>
         <TextInput
-          className="new-item"
           placeholder="What needs to be done?"
           onSave={this.onSave.bind(this)}
         />
@@ -57,3 +58,9 @@ export default class Header extends Component {
     }
   }
 }
+
+const styles = {
+  heading: {
+    marginBottom: '.2em'
+  }
+};

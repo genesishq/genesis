@@ -1,8 +1,6 @@
-'use strict';
-
 // If you are familiar with Rails, this task the equivalent of `rake assets:precompile`
-var gulp = require('gulp');
-var gulpSequence = require('gulp-sequence');
+import gulp from 'gulp';
+import gulpSequence from 'gulp-sequence';
 
 // 1) Add hashes to assets referenced by CSS and JS files
 // 2) Add hashes CSS
@@ -10,9 +8,7 @@ var gulpSequence = require('gulp-sequence');
 // 4) Update asset references in HTML
 // 5) Report filesizes
 
-gulp.task('rev', rev);
-
-function rev(callback) {
+gulp.task('rev', callback => {
   gulpSequence(
     'rev-assets',
     // 'rev-css',
@@ -21,4 +17,4 @@ function rev(callback) {
     'size-report',
     callback
   );
-}
+});

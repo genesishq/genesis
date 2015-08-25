@@ -1,29 +1,64 @@
 body {
-	font-family: $base-font-family;
-	font-size: $base-font-size;
-	line-height: $base-line-height;
-	font-weight: $base-font-weight;
+	font-weight: $default-font-weight;
 
-	color: $base-color;
+	color: $color-base;
 }
 
-h1 {}
-h2 {}
-h3 {}
-h4 {}
-h5 {}
-h6 {}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p { font-weight: $default-font-weight; }
+
+h1 {
+	font-size: 4em;
+
+	margin-top: 0.3906em;
+}
+
+h2 {
+	font-size: 2em;
+
+	margin-top: 0.7813em;
+}
+
+h3 {
+	font-size: 1.5em;
+
+	margin-top: 1.0417em;
+}
+
+h4 {
+	font-size: 1.125em;
+
+	margin-top: 1.3889em;
+}
+
+h5 {
+	font-size: 1em;
+
+	margin-top: 1.5625em;
+}
+
+h6 {
+	font-size: .875em;
+
+	margin-top: 1.7857em;
+}
+
+p { margin-top: 1.5625em; }
 
 address {}
-small {}
 
 a {
-	color: $base-link-color;
+	color: $link-color;
 	text-decoration: none;
 
 	transition: color 200 ease-out;
 
-	&:hover { color: $base-link-hover-color; }
+	&:hover { color: $link-color-hover; }
 }
 
 b,

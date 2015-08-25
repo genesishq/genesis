@@ -1,16 +1,12 @@
-'use strict';
+import gulp from 'gulp';
+import ghPages from 'gulp-gh-pages';
+import open from 'open';
+import config from '../config/deploy';
 
-var gulp = require('gulp');
-var ghPages = require('gulp-gh-pages');
-var open = require('open');
-var config = require('../config/deploy');
-
-gulp.task('deploy', ['build:production'], deploy);
-
-function deploy() {
+gulp.task('deploy', ['build:production'], () => {
   return gulp.src(config.src)
     .pipe(ghPages())
     .on('end', function() {
       open(config.url);
     });
-}
+});

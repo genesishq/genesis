@@ -1,11 +1,5 @@
-'use strict';
+import gulp from 'gulp';
+import del from 'del';
+import config from '../config';
 
-var gulp = require('gulp');
-var del = require('del');
-var config = require('../config');
-
-gulp.task('clean', clean);
-
-function clean(callback) {
-  del([config.publicDirectory], callback);
-}
+gulp.task('clean', callback => del([config.publicDirectory], callback));

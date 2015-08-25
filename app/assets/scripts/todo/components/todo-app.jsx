@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import Radium from 'radium';
 
 import Store from '../stores';
 
@@ -38,6 +39,7 @@ function getState() {
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
+@Radium
 export default class TodoApp extends Component {
 
   /**
@@ -80,7 +82,7 @@ export default class TodoApp extends Component {
    */
   render() {
     return (
-      <section>
+      <section style={styles.base}>
         <Header />
         <MainSection
           allItems={this.state.allItems}
@@ -101,3 +103,22 @@ export default class TodoApp extends Component {
     this.setState(getState());
   }
 }
+
+const fadeIn = Radium.keyframes({
+  from: {opacity: 0},
+  to: {opacity: 1}
+});
+
+const styles = {
+  base: {
+    opacity: 0,
+    animation: `${fadeIn} 200ms linear forwards`,
+
+    padding: '0 20%',
+
+    '@media (max-width: 56em)': { padding: '0 15%' },
+    '@media (max-width: 48em)': { padding: '0 10%' },
+    '@media (max-width: 40em)': { padding: '0 5%' },
+    '@media (max-width: 32em)': { padding: '0 1em' }
+  }
+};

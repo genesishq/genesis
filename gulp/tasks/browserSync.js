@@ -1,14 +1,10 @@
-'use strict';
+import gulp from 'gulp';
+import browserSync from 'browser-sync';
+import spa from 'browser-sync-spa';
+import config from '../config/browserSync';
 
-var gulp = require('gulp');
-var browserSync = require('browser-sync');
-var spa = require('browser-sync-spa');
-var config = require('../config/browserSync');
-
-gulp.task('browserSync', browserSyncTask);
-
-function browserSyncTask() {
+gulp.task('browserSync', () => {
   browserSync.use(spa());
 
   return browserSync(config);
-}
+});

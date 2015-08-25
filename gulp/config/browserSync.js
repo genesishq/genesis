@@ -1,8 +1,6 @@
-'use strict';
+import config from './';
 
-var config = require('./');
-
-module.exports = {
+export default {
   server: {
     baseDir: config.publicDirectory
   },

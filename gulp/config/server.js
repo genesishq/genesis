@@ -1,8 +1,6 @@
-'use strict';
+import config from './';
 
-var config = require('./');
-
-module.exports = {
+export default {
   root: process.cwd() + config.publicDirectory.substr(1),
   port: process.env.PORT || 1337,
   logLevel: process.env.NODE_ENV ? 'combined' : 'dev',

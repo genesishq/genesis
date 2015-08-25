@@ -1,11 +1,9 @@
-'use strict';
+const publicDirectory = './public';
+const sourceDirectory = './app';
+const publicAssets = publicDirectory + '/assets';
+const sourceAssets = sourceDirectory + '/assets';
 
-var publicDirectory = './public';
-var sourceDirectory = './app';
-var publicAssets = publicDirectory + '/assets';
-var sourceAssets = sourceDirectory + '/assets';
-
-module.exports = {
+export default {
   publicDirectory: publicDirectory,
   sourceDirectory: sourceDirectory,
   publicAssets: publicAssets,

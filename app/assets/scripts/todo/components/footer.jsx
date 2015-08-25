@@ -8,6 +8,9 @@
  */
 
 import React from 'react';
+import Radium from 'radium';
+
+import * as colors from '../styles/colors';
 
 import Actions from '../actions/';
 
@@ -23,6 +26,7 @@ const {
 /**
  * This is the Footer component class.
  */
+@Radium
 export default class Footer extends Component {
 
   /**
@@ -64,7 +68,7 @@ export default class Footer extends Component {
 
     let completed = 0;
 
-    for (let key in allItems) {
+    for (const key in allItems) {
       if (allItems.hasOwnProperty(key) && allItems[key].complete) {
         completed++;
       }
@@ -77,7 +81,7 @@ export default class Footer extends Component {
     if (completed > 0) {
       clearCompletedButton = (
         <button
-          className="clear-completed"
+          style={styles.clearCompletedButton}
           onClick={this.onClearCompletedClick.bind(this)}>
           Clear completed ({completed})
         </button>
@@ -85,14 +89,16 @@ export default class Footer extends Component {
     }
 
     return (
-      <footer className="footer">
+      <footer style={styles.base}>
         <p>
           <small>Double click a todo to edit its content.</small>
         </p>
-        <span className="item-count">
-          <strong>{itemsLeft}</strong> {itemsLeft > 1 ? 'items' : 'item'} left
-        </span>
-        {clearCompletedButton}
+        <div style={styles.meta}>
+          <span>
+            <strong>{itemsLeft}</strong> {itemsLeft > 1 ? 'items' : 'item'} left
+          </span>
+          {clearCompletedButton}
+        </div>
       </footer>
     );
   }
@@ -106,3 +112,24 @@ export default class Footer extends Component {
     Actions.destroyCompleted();
   }
 }
+
+const styles = {
+  base: {
+    marginTop: '2em',
+    textAlign: 'center'
+  },
+  meta: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '.6em'
+  },
+  clearCompletedButton: {
+    marginLeft: '1em',
+    padding: '.4em 1em',
+
+    border: '1px solid ' + colors.base,
+    boxShadow: 'none',
+    background: 'transparent'
+  }
+};

@@ -1,24 +1,30 @@
-'use strict';
+import path from 'path';
+import webpack from 'webpack';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import webpackManifest from '../lib/webpackManifest';
+import config from './';
 
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var webpackManifest = require('../lib/webpackManifest');
-var config = require('./');
+import autoprefixerCore from 'autoprefixer-core';
+import cssMqpacker from 'css-mqpacker';
+import csswring from 'csswring';
 
-module.exports = function(env) {
-  var jsSrc = config.sourceAssets + '/scripts/';
-  var jsDest = config.publicAssets + '/scripts/';
-  var publicPath = 'assets/scripts/';
+export default function(env) {
+  const jsSrc = config.sourceAssets + '/scripts/';
+  const jsDest = config.publicAssets + '/scripts/';
+  const publicPath = 'assets/scripts/';
 
-  var webpackConfig = {
+  const webpackConfig = {
     resolve: {
-      extensions: ['', '.js', '.jsx', 'scss'],
+      extensions: ['', '.js', '.jsx', '.json', 'scss'],
       modulesDirectories: ['app/assets/styles', 'node_modules', 'bower_components']
     },
 
     module: {
       loaders: [
+        {
+          test: /\.json$/,
+          loader: 'json-loader'
+        },
         {
           test: /\.jsx?$/,
           loader: 'babel-loader',
@@ -71,15 +77,15 @@ module.exports = function(env) {
     webpackConfig.devtool = 'source-map';
     webpack.debug = true;
     webpackConfig.postcss.push(
-      require('autoprefixer-core')(config.autoprefixer) // Add vendor prefixes.
+      autoprefixerCore(config.autoprefixer) // Add vendor prefixes.
     );
   }
 
   if (env === 'production') {
     webpackConfig.postcss.push(
-      require('css-mqpacker'), // Group media queries that are the same.
-      require('autoprefixer-core')(config.autoprefixer), // Add vendor prefixes.
-      require('csswring') // Minify css
+      cssMqpacker, // Group media queries that are the same.
+      autoprefixerCore(config.autoprefixer), // Add vendor prefixes.
+      csswring // Minify css
     );
 
     webpackConfig.plugins.push(

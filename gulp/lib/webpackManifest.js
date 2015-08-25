@@ -1,18 +1,16 @@
-'use strict';
+import path from 'path';
+import fs from 'fs';
 
-var path = require('path');
-var fs = require('fs');
-
-module.exports = function(publicPath, dest, filename) {
+export default function(publicPath, dest, filename) {
   filename = filename || 'rev-manifest.json';
 
-  return function() {
-    this.plugin("done", function(stats) {
-      var stats = stats.toJson();
-      var chunks = stats.assetsByChunkName;
-      var manifest = {};
+  return () => {
+    this.plugin('done', (stats) => {
+      stats = stats.toJson();
+      const chunks = stats.assetsByChunkName;
+      const manifest = {};
 
-      for (var key in chunks) {
+      for (const key in chunks) {
         manifest[publicPath + key + '.js'] = publicPath + chunks[key];
       }
 

@@ -8,6 +8,9 @@
  */
 
 import React from 'react';
+import Radium from 'radium';
+
+import * as colors from '../styles/colors';
 
 /**
  * @const Component
@@ -26,6 +29,7 @@ const ENTER_KEY_CODE = 13;
 /**
  * This is the TextInput component class.
  */
+@Radium
 export default class TextInput extends Component {
 
   /**
@@ -34,7 +38,6 @@ export default class TextInput extends Component {
    * @type {Object}
    */
   static propTypes = {
-    className: PropTypes.string,
     placeholder: PropTypes.string,
     onSave: PropTypes.func.isRequired,
     value: PropTypes.string
@@ -46,7 +49,6 @@ export default class TextInput extends Component {
    * @type {Object}
    */
   static defaultProps = {
-    className: '',
     placeholder: '',
     value: ''
   };
@@ -72,16 +74,12 @@ export default class TextInput extends Component {
    * @return {object}
    */
   render() {
-    const {
-      className,
-      placeholder
-    } = this.props;
-
+    const { placeholder } = this.props;
     const { value } = this.state;
 
     return (
       <input
-        className={className}
+        style={styles.base}
         placeholder={placeholder}
         onBlur={this.save.bind(this)}
         onChange={this.onChange.bind(this)}
@@ -136,3 +134,20 @@ export default class TextInput extends Component {
     }
   }
 }
+
+const styles = {
+  base: {
+    padding: '.75em 1em',
+    width: '100%',
+
+    color: colors.fontBase,
+    fontWeight: '200',
+
+    margin: '.5em 0',
+
+    backgroundColor: colors.base,
+
+    border: 'none',
+    borderRadius: 0
+  }
+};

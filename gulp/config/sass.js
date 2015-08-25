@@ -1,13 +1,11 @@
-'use strict';
+import config from './';
 
-var config = require('./');
-
-module.exports = {
+export default {
   src: config.sourceAssets + '/styles/**/*.{sass,scss}',
   dest: config.publicAssets + '/styles',
   settings: {
     errLogToConsole: true,
-    includePaths: ['bower_components', 'app/assets/styles']
+    includePaths: ['node_modules']
   },
   autoprefixer: {
     browsers: ['last 2 version']

@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = function(pattern, number) {
+export default function(pattern, number) {
   var string = '';
 
   while (number > 0){

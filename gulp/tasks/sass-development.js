@@ -1,22 +1,18 @@
-'use strict';
+import gulp from 'gulp';
+import browserSync from 'browser-sync';
+import sass from 'gulp-sass';
+import handleErrors from '../lib/handleErrors';
+import postcss from 'gulp-postcss';
+import autoprefixer from 'autoprefixer-core';
+import config from '../config/sass';
 
-var gulp = require('gulp');
-var browserSync = require('browser-sync');
-var sass = require('gulp-sass');
-var handleErrors = require('../lib/handleErrors');
-var postcss = require('gulp-postcss');
-var autoprefixer = require('autoprefixer-core');
-var config = require('../config/sass');
-
-gulp.task('sass:development', sassDevelopment);
-
-function sassDevelopment() {
-  var processors = [autoprefixer(config.autoprefixer)];
+gulp.task('sass:development', () => {
+  const processors = [autoprefixer(config.autoprefixer)];
 
   return gulp.src(config.src)
     .pipe(sass())
-    .pipe(postcss(processors))
     .on('error', handleErrors)
+    .pipe(postcss(processors))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({stream: true}));
-}
+});

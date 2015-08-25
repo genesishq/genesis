@@ -1,8 +1,6 @@
-'use strict';
+import config from './';
 
-var config = require('./');
-
-module.exports = {
+export default {
   src: config.sourceAssets + '/fonts/**/*',
   dest: config.publicAssets + '/fonts'
 };

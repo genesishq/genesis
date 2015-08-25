@@ -1,17 +1,13 @@
-'use strict';
+import gulp from 'gulp';
+import repeatString from '../../lib/repeatString';
+import sizereport from 'gulp-sizereport';
+import config from '../../config';
 
-var gulp = require('gulp');
-var repeatString = require('../../lib/repeatString');
-var sizereport = require('gulp-sizereport');
-var config = require('../../config');
-
-gulp.task('size-report', revSizereport);
-
-function revSizereport() {
-  var hashedFiles = '/**/*-' + repeatString('[a-z,0-9]', 8)  + '*.*';
+gulp.task('size-report', () => {
+  const hashedFiles = '/**/*-' + repeatString('[a-z,0-9]', 8)  + '*.*';
 
   return gulp.src([config.publicAssets + hashedFiles, '*!rev-manifest.json'])
     .pipe(sizereport({
         gzip: true
     }));
-}
+});
