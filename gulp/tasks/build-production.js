@@ -8,8 +8,8 @@ gulp.task('build:production', callback => {
     'karma',
     'clean',
     ['fonts', 'images', 'sass:production'],
-    'webpack:production',
     'static',
+    'webpack:production',
     'inject-styles',
     'rev',
     callback

@@ -4,11 +4,11 @@ import gulpSequence from 'gulp-sequence';
 gulp.task('build:development', callback => {
   gulpSequence(
     'clean',
-    ['fonts', 'images', 'sass:development'],
+    // ['fonts', 'images', 'sass:development'],
+    // 'static',
     'webpack:development',
-    'static',
-    'inject-styles',
-    ['watch', 'browserSync'],
+    // 'inject-styles',
+    ['watch'],
     callback
   );
 });

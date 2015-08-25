@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpackManifest from '../lib/webpackManifest';
 import config from './';
 
@@ -13,7 +14,13 @@ export default function(env) {
   const jsDest = config.publicAssets + '/scripts/';
   const publicPath = 'assets/scripts/';
 
+  const context = path.resolve(__dirname, '../../');
+
   const webpackConfig = {
+    context: context,
+    debug: (env == 'development'),
+		devtool: (env == 'development') ? 'source-map' : undefined,
+
     resolve: {
       extensions: ['', '.js', '.jsx', '.json', 'scss'],
       modulesDirectories: ['app/assets/styles', 'node_modules', 'bower_components']
@@ -22,13 +29,24 @@ export default function(env) {
     module: {
       loaders: [
         {
+          test: /\.(htaccess|ico|txt)$/,
+					loaders: [
+						'file?name=[name].[ext]'
+					],
+					include: path.resolve(context, 'app')
+        },
+        {
           test: /\.json$/,
           loader: 'json-loader'
         },
         {
           test: /\.jsx?$/,
-          loader: 'babel-loader',
-          exclude: /(node_modules|bower_components)/
+          loaders: env === 'development' ? ['react-hot-loader', 'babel-loader'] : ['babel-loader'],
+          exclude: /(node_modules)/
+        },
+        {
+          test: 'png|jpg|jpeg|gif|svg',
+          loader: 'url-loader?limit=10000'
         },
         {
           test: /\.scss$/,
@@ -40,21 +58,21 @@ export default function(env) {
             'outputStyle=expanded' +
             '&includePaths[]=' +
               path.resolve(
-                __dirname,
-                '../../bower_components',
-                '../../node_modules',
-                '../../app/assets/styles'
+                context,
+                'node_modules',
+                'app/assets/styles'
               )
         }
       ]
     },
+
     postcss: [],
     plugins: []
   };
 
   if (env !== 'test') {
     webpackConfig.entry = {
-      app: [jsSrc + '/index']
+      app: jsSrc + '/index'
     };
 
     webpackConfig.output = {
@@ -63,29 +81,45 @@ export default function(env) {
       publicPath: publicPath
     };
 
-    // Factor out common dependencies into a commons.js
-    // webpackConfig.plugins.push(
-    //   new webpack.optimize.CommonsChunkPlugin({
-    //     name: 'common',
-    //     filename: env === 'production' ? '[name]-[hash].js' : '[name].js',
-    //     minChunks: Infinity
-    //   })
-    // );
+    webpackConfig.htmlWebpackPlugin = {
+      files: {
+        favicon: [config.sourceDirectory + '/favicon.ico'],
+        css: [config.publicAssets + '/styles/app.css'],
+        js: [config.publicAssets + '/scripts/app.js'],
+        chunks: {
+          head: {
+            css: ['app.css']
+          },
+          main: {
+            entry: 'assets/scripts/app.js',
+            css: []
+          }
+        }
+      }
+    };
+
+    webpackConfig.plugins.push(new HtmlWebpackPlugin());
   }
 
   if (env === 'development') {
-    webpackConfig.devtool = 'source-map';
-    webpack.debug = true;
     webpackConfig.postcss.push(
-      autoprefixerCore(config.autoprefixer) // Add vendor prefixes.
+      autoprefixerCore(config.autoprefixer)
     );
+    webpackConfig.devServer = {
+			host: 'localhost',
+			port: 8080,
+			publicPath: '/assets',
+			contentBase: path.resolve(context, publicPath),
+      historyApiFallback: true,
+			hot: true
+		};
   }
 
   if (env === 'production') {
     webpackConfig.postcss.push(
-      cssMqpacker, // Group media queries that are the same.
-      autoprefixerCore(config.autoprefixer), // Add vendor prefixes.
-      csswring // Minify css
+      cssMqpacker,
+      autoprefixerCore(config.autoprefixer),
+      csswring
     );
 
     webpackConfig.plugins.push(
