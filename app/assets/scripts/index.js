@@ -29,9 +29,9 @@ const { run } = Router;
  */
 
 /**
- * @const app
+ * @const container
  */
-const todoApp = document.getElementById('todo-app');
+const container = document.getElementById('app');
 
 /**
  * Initiate the react app with react-router.
@@ -46,5 +46,5 @@ run(routes, Router.HistoryLocation, bootstrap);
  * @return void
  */
 function bootstrap(Handler) {
-  render(<Handler/>, todoApp);
+  render(<Handler/>, container);
 }

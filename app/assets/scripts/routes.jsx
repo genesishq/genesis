@@ -16,7 +16,7 @@ import {
 } from 'react-router';
 
 import App from './app.jsx';
-import TodoApp from './todo/components/todo-app.jsx';
+import TodoApp from './components/todo-app.jsx';
 import NotFound from './not-found.jsx';
 
 /**
@@ -29,7 +29,7 @@ import NotFound from './not-found.jsx';
  * @const routes
  */
 const routes = (
-  <Route name='app' path='/' handler={App}>
+  <Route path="/" handler={App}>
     <DefaultRoute handler={TodoApp} />
     <NotFoundRoute handler={NotFound} />
   </Route>

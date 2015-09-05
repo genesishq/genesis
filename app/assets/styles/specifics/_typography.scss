@@ -1,5 +1,5 @@
 body {
-	font-weight: $default-font-weight;
+	font-weight: $root-font-weight;
 
 	color: $color-base;
 }
@@ -10,7 +10,7 @@ h3,
 h4,
 h5,
 h6,
-p { font-weight: $default-font-weight; }
+p { font-weight: $root-font-weight; }
 
 h1 {
 	font-size: 4em;

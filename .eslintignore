@@ -1,4 +1,7 @@
 node_modules
-bower_components
-gulp
+
 public
+
+*config.js
+*conf.js
+server.js

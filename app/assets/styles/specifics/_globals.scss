@@ -4,6 +4,8 @@ body {
   height: 100%;
 }
 
-body { background: $color-bg; }
-
 *:focus { outline: 0; }
+
+[hidden][aria-hidden="false"]:focus {
+    clip: rect(0 0 0 0);
+}

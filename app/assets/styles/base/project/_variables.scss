@@ -1,14 +1,16 @@
 // Fonts -----------------------------------------------------------------------
-$default-font-family: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
-$default-font-size: 16px;
-$default-line-height: 1.6;
-$default-font-weight: 100;
+$root-font-family: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+$root-font-size: 16px;
+$root-line-height: 1.6;
+$root-font-weight: 100;
 
 // Colors ----------------------------------------------------------------------
 $color-base: #fff;
 $color-accent: turquoise;
 
 $color-bg: #2f3545;
+
+$html-background-color: $color-bg;
 
 $contrast-color-light: #fbfcfc;
 $contrast-color-medium: #969696;

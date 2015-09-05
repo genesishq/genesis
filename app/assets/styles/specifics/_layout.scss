@@ -5,24 +5,3 @@
   padding-top: 5em;
   padding-bottom: 5em;
 }
-
-.introduction {
-  text-align: center;
-
-  @media (max-width: 32em) { padding: 0 1em; }
-
-  .logo {
-    width: 4.375em;
-    height: auto;
-    display: block;
-    margin: 0 auto -1.6em;
-  }
-
-  &,
-  header { margin-bottom: 2em; }
-}
-
-.footer {
-  margin-top: 2em;
-  text-align: center;
-}

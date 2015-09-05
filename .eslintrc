@@ -40,7 +40,7 @@
   "rules": {
     "react/sort-comp": 0,
     "no-use-before-define": 0,
-    "indent": [2, 2, {"SwitchCase": 2}],
+    "indent": [2, 2, {"SwitchCase": 1}],
     "comma-dangle": [2, "never"],
     "spaced-comment": 0
   }

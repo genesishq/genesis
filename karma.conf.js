@@ -1,6 +1,24 @@
-var karmaConfig = require('./gulp/config/karma');
-
 module.exports = function(config) {
-  // karmaConfig.logLevel = config.LOG_ERROR;
-  config.set(karmaConfig)
+  config.set({
+    basePath: '.',
+    frameworks: ['mocha', 'sinon-chai'],
+    files: [
+      'app/assets/scripts/**/__tests__/*'
+    ],
+    preprocessors: {
+      'app/assets/scripts/**/__tests__/*': ['webpack']
+    },
+    webpack: require('./webpack.test.config.js'),
+    singleRun: process.env.TRAVIS_CI === 'true',
+    browsers: [(process.env.TRAVIS_CI === 'true' ? 'Firefox' : 'Chrome')],
+    reporters: ['nyan'],
+    plugins: [
+      require('karma-webpack'),
+      require('karma-mocha'),
+      require('karma-sinon-chai'),
+      require('karma-chrome-launcher'),
+      require('karma-firefox-launcher'),
+      require('karma-nyan-reporter')
+    ]
+  })
 };
