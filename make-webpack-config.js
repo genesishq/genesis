@@ -109,6 +109,9 @@ module.exports = function(options) {
         }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
+          output: {
+            comments: false
+          },
           compress: {
             warnings: false
           }
