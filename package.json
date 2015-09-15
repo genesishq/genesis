@@ -13,9 +13,9 @@
   },
   "scripts": {
     "start": "npm run build && node server",
-    "test": "./node_modules/.bin/karma start karma.conf.js --log-level debug --single-run",
-    "hot": "./node_modules/.bin/webpack-dev-server --progress --colors --hot --inline",
-    "build": "./node_modules/.bin/rimraf ./public/assets ./public/tmp ./public/index.html && NODE_ENV=production ./node_modules/.bin/webpack -p --colors --progress --config webpack.production.config.js"
+    "test": "karma start karma.conf.js --log-level debug --single-run",
+    "hot": "webpack-dev-server --progress --colors --hot --inline",
+    "build": "rimraf ./public/assets ./public/tmp ./public/index.html && NODE_ENV=production webpack -p --colors --progress --config webpack.production.config.js"
   },
   "dependencies": {
     "classnames": "^2.1.3",
