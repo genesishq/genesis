@@ -1,0 +1,14 @@
+html,
+body {
+  min-height: 100vh;
+}
+
+body {
+  background-color: $color-bg;
+}
+
+*:focus { outline: 0; }
+
+[hidden][aria-hidden="false"]:focus {
+    clip: rect(0 0 0 0);
+}

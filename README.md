@@ -9,7 +9,7 @@ Genesis
 #### Includes the following tools, tasks, and workflows:
 
 - Full asset pipeline and static html compilation using [Webpack](http://webpack.github.io/) module bundler.
-- Compiling [SASS](http://sass-lang.com/) using [sass-loader](https://github.com/jtangelder/sass-loader). Additionaly it runs [autoprefixer](https://github.com/postcss/autoprefixer), [CSSWring](https://github.com/hail2u/node-csswring) and [MQPacker](https://github.com/hail2u/node-css-mqpacker) with [postcss](https://github.com/postcss/gulp-postcss).
+- Compiling [SASS](http://sass-lang.com/) using [sass-loader](https://github.com/jtangelder/sass-loader). Additionaly it runs [autoprefixer](https://github.com/postcss/autoprefixer) and [CSSWring](https://github.com/hail2u/node-csswring) with [postcss](https://github.com/postcss/gulp-postcss).
 - Transipiling ES6 to ES5 using [Babel](https://babeljs.io/).
 - Testing with [Karma](http://karma-runner.github.io/) with [Mocha](http://mochajs.org/), [Chai](http://chaijs.com/) and [Sinon](http://sinonjs.org/).
 - Development environment using [webpack-dev-server](http://webpack.github.io/docs/webpack-dev-server.html) with hot mode.

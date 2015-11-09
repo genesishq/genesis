@@ -1,0 +1,68 @@
+body {
+  font-weight: $root-font-weight;
+
+  color: $font-color-base;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p { font-weight: $root-font-weight; }
+
+h1 {
+  font-size: 4em;
+
+  margin-top: 0.3906em;
+}
+
+h2 {
+  font-size: 2em;
+
+  margin-top: 0.7813em;
+}
+
+h3 {
+  font-size: 1.5em;
+
+  margin-top: 1.0417em;
+}
+
+h4 {
+  font-size: 1.125em;
+
+  margin-top: 1.3889em;
+}
+
+h5 {
+  font-size: 1em;
+
+  margin-top: 1.5625em;
+}
+
+h6 {
+  font-size: .875em;
+
+  margin-top: 1.7857em;
+}
+
+p { margin-top: 1.5625em; }
+
+address {}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+
+  transition: color 200 ease-out;
+
+  &:hover { color: $link-color-hover; }
+}
+
+b,
+strong { font-weight: 700; }
+
+i,
+em { font-style: italic; }
