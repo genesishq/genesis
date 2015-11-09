@@ -24,15 +24,7 @@
     "build": "NODE_ENV=production webpack -p --colors --progress --config webpack.production.config.js"
   },
   "standard": {
-    "parser": "babel-eslint",
-    "globals": [
-      "TweenLite",
-      "TimelineLite",
-      "Power1",
-      "Power2",
-      "Power3",
-      "Power4"
-    ]
+    "parser": "babel-eslint"
   },
   "dependencies": {
     "autoprefixer": "^6.0.3",
@@ -52,7 +44,6 @@
     "extract-text-webpack-plugin": "^0.9.0",
     "file-loader": "^0.8.4",
     "flux": "^2.1.1",
-    "gsap": "^1.18.0",
     "history": "^1.13.0",
     "html-webpack-plugin": "^1.6.2",
     "json-loader": "^0.5.3",
