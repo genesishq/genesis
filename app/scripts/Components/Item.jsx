@@ -11,7 +11,7 @@ import React, { PropTypes, Component } from 'react'
 import Radium from 'radium'
 import Color from 'color'
 
-import * as colors from '../styles/colors'
+import * as colors from '../utils/colors'
 
 import Actions from '../Actions/'
 

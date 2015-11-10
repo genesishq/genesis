@@ -7,11 +7,14 @@
  * file that was distributed with this source code.
  */
 
-require('babel/polyfill')
+import 'babel/polyfill'
+
+import { EventEmitter } from 'events'
 
 import dispatcher from '../dispatcher'
-import { EventEmitter } from 'events'
+
 import * as constants from '../constants'
+import * as utils from '../utils/localStorage'
 
 /**
  * This is the application stores, it handles all application data.
@@ -27,7 +30,7 @@ const CHANGE_EVENT = 'change'
 /**
  * @const items
  */
-const items = {}
+const items = utils.readFromStorage('items') || {}
 
 /**
  * Create an item.
@@ -44,6 +47,8 @@ function create (text) {
     complete: false,
     text: text
   }
+
+  utils.writeToStorage('items', items)
 }
 
 /**
@@ -56,6 +61,8 @@ function create (text) {
  */
 function update (id, updates) {
   items[id] = Object.assign({}, items[id], updates)
+
+  utils.writeToStorage('items', items)
 }
 
 /**
@@ -83,6 +90,8 @@ function updateAll (updates) {
  */
 function destroy (id) {
   delete items[id]
+
+  utils.writeToStorage('items', items)
 }
 
 /**
