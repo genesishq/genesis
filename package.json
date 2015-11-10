@@ -12,16 +12,16 @@
     "url": "git@github.com:genesishq/genesis.git"
   },
   "scripts": {
-    "postinstall": "NODE_ENV=production webpack -p --colors --progress --config webpack.production.config.js",
-    "test": "karma start karma.conf.js --log-level debug --single-run",
+    "postinstall": "NODE_ENV=production webpack -p --colors --progress",
+    "test": "NODE_ENV=test karma start karma.conf.js --log-level debug --single-run",
     "lint": "standard",
     "clean": "rimraf public",
     "start": "node server",
     "dev": "npm-run-all --parallel dev:api dev:web",
-    "dev:web": "webpack-dev-server --progress --colors --hot --inline",
+    "dev:web": "NODE_ENV=dev webpack-dev-server --progress --colors --hot --inline",
     "dev:api": "PORT=5000 nodemon server -w server",
     "prebuild": "npm run clean -s",
-    "build": "NODE_ENV=production webpack -p --colors --progress --config webpack.production.config.js"
+    "build": "NODE_ENV=production webpack -p --colors --progress"
   },
   "standard": {
     "parser": "babel-eslint"
@@ -55,6 +55,7 @@
     "karma-nyan-reporter": "0.2.2",
     "karma-sinon-chai": "^1.1.0",
     "karma-webpack": "^1.7.0",
+    "mocha": "^2.3.3",
     "morgan": "^1.6.1",
     "node-sass": "^3.4.1",
     "nodemon": "^1.8.0",

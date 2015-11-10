@@ -1,14 +1,14 @@
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
     basePath: '.',
     frameworks: ['mocha', 'sinon-chai'],
     files: [
-      'app/assets/scripts/**/__tests__/*'
+      'app/scripts/**/__tests__/*'
     ],
     preprocessors: {
-      'app/assets/scripts/**/__tests__/*': ['webpack']
+      'app/scripts/**/__tests__/*': ['webpack']
     },
-    webpack: require('./webpack.test.config.js'),
+    webpack: require('./webpack.config.js'),
     singleRun: process.env.TRAVIS_CI === 'true',
     browsers: [(process.env.TRAVIS_CI === 'true' ? 'Firefox' : 'Chrome')],
     reporters: ['nyan'],
@@ -21,4 +21,4 @@ module.exports = function(config) {
       require('karma-nyan-reporter')
     ]
   })
-};
+}
