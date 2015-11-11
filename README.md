@@ -35,16 +35,16 @@ brew install node
 
 Otherwise, you can download and install from [here](http://nodejs.org/download/).
 
-### Install npm and bower dependencies
+### Install dependencies
 ```
 npm install
 ```
 
-This runs through all dependencies listed in `package.json` and `bower.json` and downloads them into `node_modules` and `bower_components` folders in your project directory.
+This downloads all dependencies listed in `package.json`.
 
 ### Running build scripts
 ```
-npm run hot
+npm run dev
 ```
 
 This will compile your assets and start a webpack dev server with hot mode and react hot module replacement. Read [this](http://webpack.github.io/docs/webpack-dev-server.html) for more info.
@@ -52,10 +52,6 @@ This will compile your assets and start a webpack dev server with hot mode and r
 ### Preview production environment
 ```
 npm run build
-npm run server
-```
-or simply use
-```
 npm start
 ```
 
@@ -68,7 +64,7 @@ npm test
 ```
 
 ### Code style
-Depending on which editor you're using this may vary. For sublime, follow the instructions for ESLint [here](https://github.com/roadhump/SublimeLinter-eslint) and for editor config [here](https://github.com/sindresorhus/editorconfig-sublime).
+This repo follows the [standard](https://github.com/feross/standard) javascript coding style guide. It also includes some default editor settings using [editor config](https://github.com/sindresorhus/editorconfig-sublime).
 
 ## License
 Genesis is licensed under [The MIT License (MIT)](LICENSE).
