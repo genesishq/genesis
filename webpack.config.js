@@ -45,11 +45,11 @@ var config = {
         exclude: /(node_modules)/
       },
       {
-        test: /\.svg$/,
-        loader: 'raw'
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file?hash=sha512&digest=hex&name=[hash].[ext]&limit=10000'
       },
       {
-        test: /\.(png|jpg|jpeg|gif|mp4)$/,
+        test: /\.(png|jpg|jpeg|gif|mp4|webm)$/,
         loader: 'file?hash=sha512&digest=hex&name=[hash].[ext]&limit=10000'
       },
       {
@@ -83,7 +83,7 @@ var config = {
 if (!test) {
   objectAssign(config, {
     debug: dev,
-    devtool: production ? 'eval' : 'eval-source-map',
+    devtool: dev ? 'eval-source-map' : undefined,
 
     entry: [
       path.resolve(__dirname, 'app', 'entry.js')
@@ -110,7 +110,9 @@ if (!test) {
         favicon: path.resolve(__dirname, 'app', 'favicon.ico'),
         minify: {
           removeComments: true,
-          collapseWhitespace: true
+          collapseWhitespace: true,
+          minifyJS: true,
+          minifyCSS: true
         }
       })
     ].concat(production ? [
