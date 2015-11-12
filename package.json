@@ -1,7 +1,7 @@
 {
   "name": "genesis",
   "version": "1.0.0",
-  "description": "Boilerplate with gulp, webpack, babel and lots of goodies.",
+  "description": "Boilerplate for advanced web apps with webpack, babel and lots of goodies.",
   "author": "Magnus Bergman <hello@magnus.sexy>",
   "engines": {
     "node": "5.0.0",
