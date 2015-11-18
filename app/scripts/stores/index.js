@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import 'babel/polyfill'
+import objectAssign from 'object-assign'
 
 import { EventEmitter } from 'events'
 
@@ -111,7 +111,7 @@ function destroyCompleted () {
  * This is the Store object.
  * It acts as a singleton with methods handle items.
  */
-const Store = Object.assign({}, EventEmitter.prototype, {
+const Store = objectAssign({}, EventEmitter.prototype, {
 
   /**
    * Tests whether all the remaining items are marked as completed.
