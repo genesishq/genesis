@@ -9,6 +9,8 @@
 
 /**
  * These are some localStorage helper functions.
+ *
+ * @author Magnus Bergman <hello@magnus.sexy>
  */
 
 /**

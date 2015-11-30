@@ -16,6 +16,8 @@ import Actions from '../Actions/'
 
 /**
  * This is the Controls component class.
+ *
+ * @author Magnus Bergman <hello@magnus.sexy>
  */
 @Radium
 export default class Controls extends Component {

@@ -19,6 +19,8 @@ const ENTER_KEY_CODE = 13
 
 /**
  * This is the TextInput component class.
+ *
+ * @author Magnus Bergman <hello@magnus.sexy>
  */
 @Radium
 export default class TextInput extends Component {

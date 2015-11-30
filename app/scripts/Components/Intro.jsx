@@ -14,6 +14,8 @@ import logo from '../../images/logo.png'
 
 /**
  * This is the Intro component class.
+ *
+ * @author Magnus Bergman <hello@magnus.sexy>
  */
 @Radium
 export default class Intro extends Component {

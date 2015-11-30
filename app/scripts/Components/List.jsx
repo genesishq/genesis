@@ -18,6 +18,8 @@ import Item from './Item'
 
 /**
  * This is the TodoList component class.
+ *
+ * @author Magnus Bergman <hello@magnus.sexy>
  */
 @Radium
 export default class TodoList extends Component {

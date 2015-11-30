@@ -16,6 +16,8 @@ import TextInput from './TextInput.jsx'
 
 /**
  * This is the TodoForm component class.
+ *
+ * @author Magnus Bergman <hello@magnus.sexy>
  */
 @Radium
 export default class TodoForm extends Component {

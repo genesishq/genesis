@@ -12,6 +12,8 @@ import Radium from 'radium'
 
 /**
  * This is the Footer component class.
+ *
+ * @author Magnus Bergman <hello@magnus.sexy>
  */
 @Radium
 export default class Footer extends Component {

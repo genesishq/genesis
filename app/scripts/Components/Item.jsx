@@ -19,6 +19,8 @@ import TextInput from './TextInput'
 
 /**
  * This is the Item component class.
+ *
+ * @author Magnus Bergman <hello@magnus.sexy>
  */
 @Radium
 export default class Item extends Component {
