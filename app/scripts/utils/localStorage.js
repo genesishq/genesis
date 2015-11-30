@@ -1,7 +1,10 @@
-/**
- * This file is part of the FINN fritiden application.
+/*
+ * This file is part of a sample todo application.
  *
- * @author Magnus Bergman <magnus@apt.no>
+ * (c) Magnus Bergman <hello@magnus.sexy>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 /**
