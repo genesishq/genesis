@@ -23,7 +23,7 @@ const Intro = () =>
       <img className='logo' src={logo} />
       <h1>genesis</h1>
     </header>
-    <p>This is a awesome page using the <a href='https://github.com/magnus-bergman/genesis'>genesis</a> boilerplate.</p>
+    <p>This is a awesome page using the <a href='https://github.com/genesishq/genesis/'>genesis</a> boilerplate.</p>
     <p>Below is a sample todo app built with react.</p>
   </article>
 
