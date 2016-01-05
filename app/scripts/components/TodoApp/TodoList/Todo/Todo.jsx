@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import './item.scss'
+import './todo.scss'
 
 import React, { PropTypes } from 'react'
 
@@ -17,17 +17,17 @@ import TextInput from 'components/TodoApp/common/TextInput/TextInput'
 import Checkbox from 'components/TodoApp/common/Checkbox/Checkbox'
 
 /**
- * This is the Item component class.
+ * This is the Todo component class.
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-const Item = React.createClass({
+const Todo = React.createClass({
 
   /**
    * Declare component property types.
    */
   propTypes: {
-    item: PropTypes.shape({
+    todo: PropTypes.shape({
       id: PropTypes.string,
       text: PropTypes.string,
       completed: PropTypes.bool
@@ -51,18 +51,18 @@ const Item = React.createClass({
   },
 
   /**
-   * Event handler that toggles the "complete" state of the item.
+   * Event handler that toggles the "complete" state of the todo.
    *
    * @return {void}
    */
   onToggleCompleted () {
-    const { item } = this.props
+    const { todo } = this.props
 
-    toggleCompleted(item)
+    toggleCompleted(todo)
   },
 
   /**
-   * Event handler that triggers edit mode when double clicking the item.
+   * Event handler that triggers edit mode when double clicking the todo.
    *
    * @return {void}
    */
@@ -72,27 +72,27 @@ const Item = React.createClass({
 
   /**
    * Event handler passed down to the TextInput component that triggers save
-   * when the item has been edited.
+   * when the todo has been edited.
    *
    * @param {string} text
    */
   onSubmit (text) {
-    const { item } = this.props
+    const { todo } = this.props
 
-    updateText(item.id, text)
+    updateText(todo.id, text)
 
     this.setState({isEditing: false})
   },
 
   /**
-   * Event handler that deletes the item.
+   * Event handler that deletes the todo.
    *
    * @return {void}
    */
   onDestroy () {
-    const { item } = this.props
+    const { todo } = this.props
 
-    destroy(item.id)
+    destroy(todo.id)
   },
 
   /**
@@ -101,7 +101,7 @@ const Item = React.createClass({
    * @return {object}
    */
   render () {
-    const { item } = this.props
+    const { todo } = this.props
     const { isEditing } = this.state
 
     let input = null
@@ -110,16 +110,16 @@ const Item = React.createClass({
       input = (
         <TextInput
           onSubmit={this.onSubmit}
-          initialValue={item.text} />
+          initialValue={todo.text} />
       )
     }
 
     return (
-      <li className='item'>
+      <li className='todo'>
         <div>
-          <Checkbox checked={item.completed} onChange={this.onToggleCompleted} />
+          <Checkbox checked={todo.completed} onChange={this.onToggleCompleted} />
           <label onDoubleClick={this.onDoubleClick}>
-            {item.text}
+            {todo.text}
           </label>
           <button
             className='destroy-button'
@@ -137,4 +137,4 @@ const Item = React.createClass({
 
 })
 
-export default Item
+export default Todo

@@ -15,18 +15,18 @@ import store from 'stores'
 
 import Intro from './Intro/Intro'
 import Form from './Form/Form'
-import Items from './Items/Items'
+import TodoList from './TodoList/TodoList'
 import Controls from './Controls/Controls'
 import Footer from './Footer/Footer'
 
 /**
- * Retrieve the current item data from the store.
+ * Retrieve the current todo data from the store.
  *
  * @return {object}
  */
 function getState () {
   return {
-    items: store.getItems(),
+    todos: store.getTodos(),
     areAllCompleted: store.getAreAllCompleted()
   }
 }
@@ -82,30 +82,30 @@ const TodoApp = React.createClass({
    * @return {object}
    */
   render () {
-    const { items, areAllCompleted } = this.state
+    const { todos, areAllCompleted } = this.state
 
-    let itemList = null
+    let todoList = null
     let controls = null
     let completed = 0
 
-    const total = Object.keys(items).length
+    const total = Object.keys(todos).length
 
     if (total > 0) {
-      for (const key in items) {
-        if (items.hasOwnProperty(key) && items[key].completed) {
+      for (const key in todos) {
+        if (todos.hasOwnProperty(key) && todos[key].completed) {
           completed++
         }
       }
 
-      itemList = <Items items={items} areAllCompleted={areAllCompleted} />
-      controls = <Controls total={total} completed={completed} items={items} />
+      todoList = <TodoList todos={todos} areAllCompleted={areAllCompleted} />
+      controls = <Controls total={total} completed={completed} todos={todos} />
     }
 
     return (
       <main className='todo-app'>
         <Intro />
         <Form />
-        {itemList}
+        {todoList}
         {controls}
         <Footer />
       </main>

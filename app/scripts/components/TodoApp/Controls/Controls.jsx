@@ -18,8 +18,8 @@ import { destroyCompleted } from 'actions'
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-const Controls = ({ total, completed, items }) => {
-  const itemsLeft = total - completed
+const Controls = ({ total, completed, todos }) => {
+  const todosLeft = total - completed
 
   let destroyCompletedButton = null
 
@@ -40,7 +40,7 @@ const Controls = ({ total, completed, items }) => {
       </p>
       <div className='meta'>
         <span>
-          <strong>{itemsLeft}</strong> {itemsLeft > 1 ? 'items' : 'item'} left
+          <strong>{todosLeft}</strong> {todosLeft > 1 ? 'todos' : 'todo'} left
         </span>
         {destroyCompletedButton}
       </div>

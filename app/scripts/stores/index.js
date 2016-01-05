@@ -28,12 +28,12 @@ import * as storage from 'utils/localStorage'
 const CHANGE_EVENT = 'change'
 
 /**
- * @const items
+ * @const todos
  */
-const items = storage.read('items') || {}
+const todos = storage.read('todos') || {}
 
 /**
- * Create an item.
+ * Create a todo.
  *
  * @param {string} text
  *
@@ -42,17 +42,17 @@ const items = storage.read('items') || {}
 function create (text) {
   const id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36)
 
-  items[id] = {
+  todos[id] = {
     id: id,
     completed: false,
     text: text
   }
 
-  storage.write('items', items)
+  storage.write('todos', todos)
 }
 
 /**
- * Update an item.
+ * Update a todo.
  *
  * @param {number} id
  * @param {object} updates An object literal containing only the data to be updated.
@@ -60,69 +60,69 @@ function create (text) {
  * @return {void}
  */
 function update (id, updates) {
-  items[id] = Object.assign({}, items[id], updates)
+  todos[id] = Object.assign({}, todos[id], updates)
 
-  storage.write('items', items)
+  storage.write('todos', todos)
 }
 
 /**
- * Update all of the items with the same object.
- * the data to be updated. Used to mark all items as completed.
+ * Update all of the todos with the same object.
+ * the data to be updated. Used to mark all todos as completed.
  *
  * @param {object} updates An object literal containing only the data to be updated.
  *
  * @return {void}
  */
 function updateAll (updates) {
-  for (let id in items) {
-    if (items.hasOwnProperty(id)) {
+  for (let id in todos) {
+    if (todos.hasOwnProperty(id)) {
       update(id, updates)
     }
   }
 }
 
 /**
- * Delete an item.
+ * Delete a todo.
  *
  * @param {string} id
  *
  * @return {void}
  */
 function destroy (id) {
-  delete items[id]
+  delete todos[id]
 
-  storage.write('items', items)
+  storage.write('todos', todos)
 }
 
 /**
- * Delete all the completed items.
+ * Delete all the completed todos.
  *
  * @return {void}
  */
 function destroyCompleted () {
-  for (let id in items) {
-    if (items.hasOwnProperty(id) && items[id].completed) {
-      delete items[id]
+  for (let id in todos) {
+    if (todos.hasOwnProperty(id) && todos[id].completed) {
+      delete todos[id]
     }
   }
 
-  storage.write('items', items)
+  storage.write('todos', todos)
 }
 
 /**
  * This is the store object.
- * It acts as a singleton with methods handle items.
+ * It acts as a singleton with methods handle todos.
  */
 const store = objectAssign({}, EventEmitter.prototype, {
 
   /**
-   * Tests whether all the remaining items are marked as completed.
+   * Tests whether all the remaining todos are marked as completed.
    *
    * @return {boolean}
    */
   getAreAllCompleted () {
-    for (let id in items) {
-      if (items.hasOwnProperty(id) && !items[id].completed) {
+    for (let id in todos) {
+      if (todos.hasOwnProperty(id) && !todos[id].completed) {
         return false
       }
     }
@@ -134,8 +134,8 @@ const store = objectAssign({}, EventEmitter.prototype, {
    *
    * @return {object}
    */
-  getItems () {
-    return items
+  getTodos () {
+    return todos
   },
 
   /**

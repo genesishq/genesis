@@ -17,7 +17,7 @@ import * as constants from '../constants'
  */
 
 /**
- * Create new item.
+ * Create new todo.
  *
  * @param {string} text
  *
@@ -31,7 +31,7 @@ export function create (text) {
 }
 
 /**
- * Update item.
+ * Update todo.
  *
  * @param {number} id
  * @param {string} text
@@ -47,15 +47,15 @@ export function updateText (id, text) {
 }
 
 /**
- * Toggle whether a single item is complete.
+ * Toggle whether a single todo is complete.
  *
- * @param {object} item
+ * @param {object} todo
  *
  * @return {void}
  */
-export function toggleCompleted (item) {
-  const { id } = item
-  const actionType = item.completed ? constants.UNDO_COMPLETED : constants.COMPLETED
+export function toggleCompleted (todo) {
+  const { id } = todo
+  const actionType = todo.completed ? constants.UNDO_COMPLETED : constants.COMPLETED
 
   dispatcher.dispatch({
     actionType: actionType,
@@ -64,7 +64,7 @@ export function toggleCompleted (item) {
 }
 
 /**
- * Mark all items as complete.
+ * Mark all todos as complete.
  *
  * @return {void}
  */
@@ -75,7 +75,7 @@ export function completeAll () {
 }
 
 /**
- * Destroy item.
+ * Destroy todo.
  *
  * @param {number} id
  *
@@ -89,7 +89,7 @@ export function destroy (id) {
 }
 
 /**
- * Delete all the completed items.
+ * Delete all the completed todos.
  *
  * @return {void}
  */

@@ -7,26 +7,26 @@
  * file that was distributed with this source code.
  */
 
-import './items.scss'
+import './todo-list.scss'
 
 import React from 'react'
 
 import { completeAll } from 'actions'
 
-import Item from './Item/Item'
+import Todo from './Todo/Todo'
 import Checkbox from 'components/TodoApp/common/Checkbox/Checkbox'
 
 /**
- * This is the Items component class.
+ * This is the TodoList component class.
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-const Items = ({ items, areAllCompleted }) =>
-  <section className='item-list'>
+const TodoList = ({ todos, areAllCompleted }) =>
+  <section className='todos'>
     <Checkbox checked={areAllCompleted} text='Toggle all as completed' onChange={completeAll} />
-    <ul className='items'>
-      {Object.keys(items).map(key => <Item key={key} item={items[key]} />)}
+    <ul className='todo-list'>
+      {Object.keys(todos).map(key => <Todo key={key} todo={todos[key]} />)}
     </ul>
   </section>
 
-export default Items
+export default TodoList
