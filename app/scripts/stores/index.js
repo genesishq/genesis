@@ -11,10 +11,10 @@ import objectAssign from 'object-assign'
 
 import { EventEmitter } from 'events'
 
-import dispatcher from '../dispatcher'
+import dispatcher from 'dispatcher'
 
-import * as constants from '../constants'
-import * as utils from '../utils/localStorage'
+import * as constants from 'constants'
+import * as storage from 'utils/localStorage'
 
 /**
  * This is the application stores, it handles all application data.
@@ -30,25 +30,25 @@ const CHANGE_EVENT = 'change'
 /**
  * @const items
  */
-const items = utils.readFromStorage('items') || {}
+const items = storage.read('items') || {}
 
 /**
  * Create an item.
  *
  * @param {string} text
  *
- * @return void
+ * @return {void}
  */
 function create (text) {
   const id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36)
 
   items[id] = {
     id: id,
-    complete: false,
+    completed: false,
     text: text
   }
 
-  utils.writeToStorage('items', items)
+  storage.write('items', items)
 }
 
 /**
@@ -57,12 +57,12 @@ function create (text) {
  * @param {number} id
  * @param {object} updates An object literal containing only the data to be updated.
  *
- * @return void
+ * @return {void}
  */
 function update (id, updates) {
   items[id] = Object.assign({}, items[id], updates)
 
-  utils.writeToStorage('items', items)
+  storage.write('items', items)
 }
 
 /**
@@ -71,7 +71,7 @@ function update (id, updates) {
  *
  * @param {object} updates An object literal containing only the data to be updated.
  *
- * @return void
+ * @return {void}
  */
 function updateAll (updates) {
   for (let id in items) {
@@ -86,41 +86,43 @@ function updateAll (updates) {
  *
  * @param {string} id
  *
- * @return void
+ * @return {void}
  */
 function destroy (id) {
   delete items[id]
 
-  utils.writeToStorage('items', items)
+  storage.write('items', items)
 }
 
 /**
  * Delete all the completed items.
  *
- * @return void
+ * @return {void}
  */
 function destroyCompleted () {
   for (let id in items) {
-    if (items.hasOwnProperty(id) && items[id].complete) {
-      destroy(id)
+    if (items.hasOwnProperty(id) && items[id].completed) {
+      delete items[id]
     }
   }
+
+  storage.write('items', items)
 }
 
 /**
- * This is the Store object.
+ * This is the store object.
  * It acts as a singleton with methods handle items.
  */
-const Store = objectAssign({}, EventEmitter.prototype, {
+const store = objectAssign({}, EventEmitter.prototype, {
 
   /**
    * Tests whether all the remaining items are marked as completed.
    *
    * @return {boolean}
    */
-  areAllComplete () {
+  getAreAllCompleted () {
     for (let id in items) {
-      if (items.hasOwnProperty(id) && !items[id].complete) {
+      if (items.hasOwnProperty(id) && !items[id].completed) {
         return false
       }
     }
@@ -132,14 +134,14 @@ const Store = objectAssign({}, EventEmitter.prototype, {
    *
    * @return {object}
    */
-  getAll () {
+  getItems () {
     return items
   },
 
   /**
    * Emit a change event to update the state of each listener.
    *
-   * @return void
+   * @return {void}
    */
   emitChange () {
     this.emit(CHANGE_EVENT)
@@ -150,7 +152,7 @@ const Store = objectAssign({}, EventEmitter.prototype, {
    *
    * @param {function} callback
    *
-   * @return void
+   * @return {void}
    */
   addChangeListener (callback) {
     this.on(CHANGE_EVENT, callback)
@@ -161,7 +163,7 @@ const Store = objectAssign({}, EventEmitter.prototype, {
    *
    * @param {function} callback
    *
-   * @return void
+   * @return {void}
    */
   removeChangeListener (callback) {
     this.removeListener(CHANGE_EVENT, callback)
@@ -173,7 +175,7 @@ const Store = objectAssign({}, EventEmitter.prototype, {
  *
  * @param {object} action
  *
- * @return void
+ * @return {void}
  */
 function actionsHandler (action) {
   let text = null
@@ -183,45 +185,45 @@ function actionsHandler (action) {
       text = action.text.trim()
       if (text !== '') {
         create(text)
-        Store.emitChange()
+        store.emitChange()
       }
       break
 
     case constants.TOGGLE_COMPLETE_ALL:
-      if (Store.areAllComplete()) {
-        updateAll({complete: false})
+      if (store.getAreAllCompleted()) {
+        updateAll({completed: false})
       } else {
-        updateAll({complete: true})
+        updateAll({completed: true})
       }
-      Store.emitChange()
+      store.emitChange()
       break
 
-    case constants.UNDO_COMPLETE:
-      update(action.id, {complete: false})
-      Store.emitChange()
+    case constants.UNDO_COMPLETED:
+      update(action.id, {completed: false})
+      store.emitChange()
       break
 
-    case constants.COMPLETE:
-      update(action.id, {complete: true})
-      Store.emitChange()
+    case constants.COMPLETED:
+      update(action.id, {completed: true})
+      store.emitChange()
       break
 
     case constants.UPDATE_TEXT:
       text = action.text.trim()
       if (text !== '') {
         update(action.id, {text: text})
-        Store.emitChange()
+        store.emitChange()
       }
       break
 
     case constants.DESTROY:
       destroy(action.id)
-      Store.emitChange()
+      store.emitChange()
       break
 
     case constants.DESTROY_COMPLETED:
       destroyCompleted()
-      Store.emitChange()
+      store.emitChange()
       break
 
     default:
@@ -234,4 +236,4 @@ function actionsHandler (action) {
  */
 dispatcher.register(actionsHandler)
 
-export default Store
+export default store

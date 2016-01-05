@@ -8,13 +8,13 @@ $root-font-weight: 100;
 $color-base: #fff;
 $color-accent: turquoise;
 
-$color-bg: #2f3545;
+$color-bg: linear-gradient(to left, #5f2c82 , #49a09d);
 
 $html-background-color: $color-bg;
 
 $contrast-color-light: #fbfcfc;
 $contrast-color-medium: #969696;
-$contrast-color-dark: #2f2f2f;
+$contrast-color-dark: #2f3545;
 
 $font-color-base: $color-base;
 $font-color-subtle: #888;

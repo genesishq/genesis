@@ -10,10 +10,9 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route } from 'react-router'
+import createBrowserHistory from 'history/lib/createBrowserHistory'
 
-import history from './history'
-
-import TodoApp from 'Components/TodoApp/TodoApp'
+import TodoApp from 'components/TodoApp/TodoApp'
 
 /**
  * This is the application index file.
@@ -30,7 +29,7 @@ const root = document.getElementById('root')
  * Render the app with react-router.
  */
 render((
-  <Router history={history}>
+  <Router history={createBrowserHistory()}>
     <Route path='/' component={TodoApp} />
   </Router>
 ), root)

@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-require('./text-input.scss')
+import './text-input.scss'
 
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes } from 'react'
 
 /**
  * @const ENTER_KEY_CODE
@@ -21,43 +21,36 @@ const ENTER_KEY_CODE = 13
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-export default class TextInput extends Component {
+const TextInput = React.createClass({
 
   /**
    * Declare component property types.
-   *
-   * @type {Object}
    */
-  static propTypes = {
+  propTypes: {
     placeholder: PropTypes.string,
-    onSave: PropTypes.func.isRequired,
-    value: PropTypes.string
-  }
+    onSubmit: PropTypes.func.isRequired,
+    initialValue: PropTypes.string
+  },
 
   /**
    * Set default values for component properties.
-   *
-   * @type {Object}
    */
-  static defaultProps = {
-    placeholder: '',
-    value: ''
-  }
+  defaultProps: {},
 
   /**
    * Initiate and set state for the component.
    *
    * @param {object} props
    *
-   * @return void
+   * @return {void}
    */
-  constructor (props) {
-    super(props)
+  getInitialState () {
+    const { initialValue } = this.props
 
-    this.state = {
-      value: props.value
+    return {
+      value: initialValue || ''
     }
-  }
+  },
 
   /**
    * Event handler that updates the state of the component when the
@@ -65,13 +58,13 @@ export default class TextInput extends Component {
    *
    * @param {object} event
    *
-   * @return void
+   * @return {void}
    */
   onChange (event) {
     this.setState({
       value: event.target.value
     })
-  }
+  },
 
   /**
    * Event handler listens for 'keydown' and saves the item if the enter key
@@ -79,29 +72,29 @@ export default class TextInput extends Component {
    *
    * @param {object} event
    *
-   * @return void
+   * @return {void}
    */
   onKeyDown (event) {
     if (event.keyCode === ENTER_KEY_CODE) {
-      this.save()
+      this.submit()
     }
-  }
+  },
 
   /**
    * Event handler that clears the input on blur.
    *
-   * @return void
+   * @return {void}
    */
-  save () {
+  submit () {
     const { value } = this.state
-    const { onSave } = this.props
+    const { onSubmit } = this.props
 
-    onSave(value)
+    onSubmit(value)
 
     this.setState({
       value: ''
     })
-  }
+  },
 
   /**
    * Render react component.
@@ -116,12 +109,13 @@ export default class TextInput extends Component {
       <input
         className='text-input'
         placeholder={placeholder}
-        onBlur={this.save.bind(this)}
-        onChange={this.onChange.bind(this)}
-        onKeyDown={this.onKeyDown.bind(this)}
+        onChange={this.onChange}
+        onKeyDown={this.onKeyDown}
         value={value}
         autoFocus />
     )
   }
 
-}
+})
+
+export default TextInput

@@ -19,9 +19,9 @@
 export const CREATE = 'CREATE'
 
 /**
- * @const COMPLETE
+ * @const COMPLETED
  */
-export const COMPLETE = 'COMPLETE'
+export const COMPLETED = 'COMPLETED'
 
 /**
  * @const DESTROY
@@ -39,9 +39,9 @@ export const DESTROY_COMPLETED = 'DESTROY_COMPLETED'
 export const TOGGLE_COMPLETE_ALL = 'TOGGLE_COMPLETE_ALL'
 
 /**
- * @const UNDO_COMPLETE
+ * @const UNDO_COMPLETED
  */
-export const UNDO_COMPLETE = 'UNDO_COMPLETE'
+export const UNDO_COMPLETED = 'UNDO_COMPLETED'
 
 /**
  * @const UPDATE_TEXT

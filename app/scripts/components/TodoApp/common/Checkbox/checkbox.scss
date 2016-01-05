@@ -1,9 +1,5 @@
 @import '~utils/__utils';
 
-.item {
-  margin: .5em 0;
-}
-
 .checkbox {
   position: relative;
 
@@ -43,26 +39,4 @@
       transition: opacity 100ms $easeOutCubic;
     }
   }
-}
-
-.destroy-button {
-  float: right;
-
-  height: 2em;
-  width: 2em;
-
-  padding: .4em .5em;
-
-  border-radius: 100%;
-
-  border: none;
-  background: $color-bg;
-
-  transition: background 100ms $easeOutCubic;
-
-  &:hover {
-    background: darken($color-bg, 0.05);
-  }
-
-  svg { fill: $color-base; }
 }

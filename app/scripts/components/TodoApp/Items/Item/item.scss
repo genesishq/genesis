@@ -1,0 +1,19 @@
+@import '~utils/__utils';
+
+.item {
+  margin: .5em 0;
+}
+
+.destroy-button {
+  float: right;
+
+  height: 1em;
+  width: 1em;
+
+  margin-right: 0.25em;
+
+  border: none;
+  background: transparent;
+
+  svg { fill: $color-base; }
+}

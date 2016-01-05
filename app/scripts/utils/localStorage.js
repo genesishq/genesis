@@ -13,33 +13,46 @@
  * @author Magnus Bergman <hello@magnus.sexy>
  */
 
-/**
- * Load item from localStorage by key.
- *
- * @param {string} key
- *
- * @return {object}
- */
-export function readFromStorage (key) {
-  const state = JSON.parse(window.localStorage.getItem(key))
+ /**
+  * Read from localStorage by key.
+  *
+  * @param {string} key
+  *
+  * @return {object}
+  */
+ export function read (key) {
+   const data = JSON.parse(window.localStorage.getItem(key))
 
-  for (let k in state) {
-    if (state.hasOwnProperty(k)) {
-      return state
-    }
-  }
+   for (const k in data) {
+     if (data.hasOwnProperty(k)) {
+       return data
+     }
+   }
 
-  return false
-}
+   return false
+ }
 
-/**
- * Save data to localStorage with key.
- *
- * @param {string} key
- * @param {object} data
- *
- * @return void
- */
-export function writeToStorage (key, data) {
-  window.localStorage.setItem(key, JSON.stringify(data))
-}
+ /**
+  * Write to localStorage with key.
+  *
+  * @param {string} key
+  * @param {object} data
+  *
+  * @return void
+  */
+ export function write (key, data) {
+   const value = typeof data === 'boolean' ? data : JSON.stringify(data)
+
+   window.localStorage.setItem(key, value)
+ }
+
+ /**
+  * Delete key from localStorage.
+  *
+  * @param {string} key
+  *
+  * @return void
+  */
+ export function unset (key) {
+   delete window.localStorage[key]
+ }
