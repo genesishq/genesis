@@ -9,8 +9,7 @@
 
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route } from 'react-router'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
+import { browserHistory, Router, Route } from 'react-router'
 
 import TodoApp from 'components/TodoApp/TodoApp'
 
@@ -29,7 +28,7 @@ const root = document.getElementById('root')
  * Render the app with react-router.
  */
 render((
-  <Router history={createBrowserHistory()}>
+  <Router history={browserHistory}>
     <Route path='/' component={TodoApp} />
   </Router>
 ), root)
