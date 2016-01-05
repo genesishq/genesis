@@ -3,5 +3,10 @@
     "es2015",
     "stage-1",
     "react"
-  ]
+  ],
+  "env": {
+    "development": {
+      "presets": ["react-hmre"]
+    }
+  }
 }

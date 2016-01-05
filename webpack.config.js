@@ -41,13 +41,8 @@ const config = {
         loader: 'json-loader'
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loader: 'babel',
-        exclude: /(node_modules)/
-      },
-      {
-        test: /\.jsx$/,
-        loaders: production ? ['babel'] : ['react-hot', 'babel'],
         exclude: /(node_modules)/
       },
       {
@@ -86,14 +81,19 @@ const config = {
 if (!test) {
   objectAssign(config, {
     debug: dev,
-    devtool: dev ? 'cheap-eval-source-map' : undefined,
+    devtool: dev ? 'cheap-module-eval-source-map' : undefined,
 
-    entry: [
-      path.resolve(__dirname, 'app', 'entry.js')
-    ],
+    entry: [].concat(dev
+      ? [
+        'eventsource-polyfill', // necessary for hot reloading with IE
+        'webpack-hot-middleware/client'
+      ]
+      : []
+    ).concat([path.resolve(__dirname, 'app', 'entry.js')]),
 
     output: {
       path: path.resolve(__dirname, 'public'),
+      publicPath: '/',
       filename: '[hash].js'
     },
 
@@ -133,21 +133,10 @@ if (!test) {
     }),
     cssExtractPlugin
   ] : [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]))
-}
-
-if (dev) {
-  objectAssign(config, {
-    devServer: {
-      publicPath: '/',
-      port: 3000,
-      proxy: {
-        '/api/*': 'http://localhost:5000/'
-      },
-      historyApiFallback: true
-    }
-  })
 }
 
 module.exports = config
