@@ -11,6 +11,17 @@
     "type": "git",
     "url": "git@github.com:genesishq/genesis.git"
   },
+  "keywords": [
+    "react",
+    "reactjs",
+    "boilerplate",
+    "hot",
+    "reload",
+    "hmr",
+    "live",
+    "edit",
+    "webpack"
+  ],
   "scripts": {
     "postinstall": "npm run build",
     "test": "npm run lint & cross-env NODE_ENV=test karma start",

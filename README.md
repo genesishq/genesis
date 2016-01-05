@@ -4,7 +4,7 @@ Genesis
 
 > Powerful boilerplate for building advanced web apps. Special thanks to [Vincent Klaiber](https://github.com/vinkla/) for the amazing artwork.
 >
-> An example of the generated output can be viewed [here](https://magnus.sexy/genesis).
+> An example of the generated output can be viewed [here](http://genesishq.github.io/genesis/).
 
 #### Includes the following tools, tasks, and workflows:
 
