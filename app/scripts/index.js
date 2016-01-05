@@ -13,7 +13,7 @@ import { Router, Route } from 'react-router'
 
 import history from './history'
 
-import TodoApp from './Components/TodoApp'
+import TodoApp from 'Components/TodoApp/TodoApp'
 
 /**
  * This is the application index file.

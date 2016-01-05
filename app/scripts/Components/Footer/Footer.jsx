@@ -7,15 +7,15 @@
  * file that was distributed with this source code.
  */
 
+require('./footer.scss')
+
 import React, { Component } from 'react'
-import Radium from 'radium'
 
 /**
  * This is the Footer component class.
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-@Radium
 export default class Footer extends Component {
 
   /**
@@ -25,17 +25,10 @@ export default class Footer extends Component {
    */
   render () {
     return (
-      <footer style={styles.base}>
+      <footer className='footer'>
         <p><small>Made with ♥ by <a href='https://magnus.sexy'>Magnus Bergman</a></small></p>
       </footer>
     )
   }
 
-}
-
-const styles = {
-  base: {
-    marginTop: '2em',
-    textAlign: 'center'
-  }
 }

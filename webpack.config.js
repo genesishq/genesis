@@ -1,23 +1,29 @@
-var path = require('path')
-var webpack = require('webpack')
-var objectAssign = require('object-assign')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+'use strict'
 
-var production = process.env.NODE_ENV === 'production'
-var dev = process.env.NODE_ENV === 'dev'
-var test = process.env.NODE_ENV === 'test'
+const path = require('path')
+const webpack = require('webpack')
+const objectAssign = require('object-assign')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-var cssOutputName = null
-var cssExtractPlugin = null
+const production = process.env.NODE_ENV === 'production'
+const test = process.env.NODE_ENV === 'test'
+const dev = !(production || test)
+
+let cssOutputName = null
+let cssExtractPlugin = null
 
 if (production) {
   cssOutputName = '[contenthash].css'
   cssExtractPlugin = new ExtractTextPlugin(cssOutputName)
 }
 
-var config = {
+const config = {
   resolve: {
+    root: [
+      path.resolve(__dirname, 'app', 'scripts'),
+      path.resolve(__dirname, 'app', 'styles')
+    ],
     extensions: ['', '.js', '.jsx', '.json', 'scss'],
     modulesDirectories: ['node_modules'],
     alias: {
@@ -55,35 +61,32 @@ var config = {
       {
         test: /\.scss$/,
         loader: production
-        ? cssExtractPlugin.extract(
-            'style',
-            'css!' +
-            'postcss!' +
-            'sass' +
-            '?outputStyle=expanded' +
-            '&includePaths[]=' +
-              encodeURIComponent(path.resolve(__dirname, 'node_modules')) +
-            '&includePaths[]=' +
-              encodeURIComponent(path.resolve(__dirname, 'app', 'assets', 'styles'))
-          )
-        : 'style!' +
-          'css!' +
-          'postcss!' +
-          'sass' +
-          '?outputStyle=expanded' +
-          '&includePaths[]=' +
-            encodeURIComponent(path.resolve(__dirname, 'node_modules')) +
-          '&includePaths[]=' +
-            encodeURIComponent(path.resolve(__dirname, 'app', 'assets', 'styles'))
+        ? cssExtractPlugin.extract('style', 'css!postcss!sass')
+        : 'style!css!postcss!sass'
       }
     ]
-  }
+  },
+
+  sassLoader: {
+    outputStyle: 'expanded',
+    includePaths: [
+      path.resolve(__dirname, 'node_modules'),
+      path.resolve(__dirname, 'app', 'styles')
+    ]
+  },
+
+  plugins: [
+    new webpack.ProvidePlugin({
+      'Promise': 'exports?global.Promise!es6-promise', // Thanks Aaron (https://gist.github.com/Couto/b29676dd1ab8714a818f#gistcomment-1584602)
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
+  ]
 }
 
 if (!test) {
   objectAssign(config, {
     debug: dev,
-    devtool: dev ? 'eval-source-map' : undefined,
+    devtool: dev ? 'cheap-eval-source-map' : undefined,
 
     entry: [
       path.resolve(__dirname, 'app', 'entry.js')
@@ -95,62 +98,54 @@ if (!test) {
     },
 
     postcss: [
-      require('autoprefixer')({
-        browsers: ['last 2 version']
-      })
-    ].concat(production ? [
-      require('csswring')({removeAllComments: true})
-    ] : []),
-
-    plugins: [
-      new HtmlWebpackPlugin({
-        inject: true,
-        filename: 'index.html',
-        template: path.resolve(__dirname, 'app', 'index.template.html'),
-        favicon: path.resolve(__dirname, 'app', 'favicon.ico'),
-        minify: {
-          removeComments: true,
-          collapseWhitespace: true,
-          minifyJS: true,
-          minifyCSS: true
-        }
-      })
-    ].concat(production ? [
-      new webpack.DefinePlugin({
-        'process.env': {
-          'NODE_ENV': JSON.stringify('production')
-        }
-      }),
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-        output: {
-          comments: false
-        },
-        compress: {
-          warnings: false
-        }
-      }),
-      cssExtractPlugin
-    ] : [
-      new webpack.NoErrorsPlugin()
-    ])
+      require('autoprefixer')({browsers: ['last 2 version']})
+    ].concat(production
+      ? [require('csswring')({removeAllComments: true})]
+      : []
+    )
   })
+
+  config.plugins.push(...[
+    new HtmlWebpackPlugin({
+      inject: true,
+      filename: 'index.html',
+      template: path.resolve(__dirname, 'app', 'index.template.html'),
+      favicon: path.resolve(__dirname, 'app', 'favicon.ico'),
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        minifyJS: true,
+        minifyCSS: true
+      }
+    })
+  ])
+
+  config.plugins.push(...(production ? [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      output: {comments: false},
+      compress: {warnings: false}
+    }),
+    cssExtractPlugin
+  ] : [
+    new webpack.NoErrorsPlugin()
+  ]))
 }
 
 if (dev) {
   objectAssign(config, {
     devServer: {
-      contentBase: path.resolve(__dirname, 'public'),
       publicPath: '/',
       port: 3000,
       proxy: {
         '/api/*': 'http://localhost:5000/'
       },
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      progress: true,
-      colors: true
+      historyApiFallback: true
     }
   })
 }

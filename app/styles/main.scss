@@ -1,8 +1,8 @@
 @charset 'UTF-8';
 
-@import 'base/__base';
+@import 'utils/__utils';
+@import 'project/__project';
 
 @import 'sanitize.css/sanitize.scss';
 
-@import 'components/__components';
 @import 'specifics/__specifics';

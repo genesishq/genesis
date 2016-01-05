@@ -1,32 +1,40 @@
-var express = require('express')
-var compression = require('compression')
-var logger = require('morgan')
-var path = require('path')
-var cors = require('cors')
+'use strict'
 
-var app = express()
+const express = require('express')
+const compression = require('compression')
+const logger = require('morgan')
+const path = require('path')
+const cors = require('cors')
+const bodyParser = require('body-parser')
 
-var port = process.env.PORT || 3000
-var root = path.join(__dirname, './../public')
-var logLevel = process.env.NODE_ENV === 'production' ? 'combined' : 'dev'
+const app = express()
+const router = express.Router()
+
+const port = process.env.PORT || 3000
+const root = path.join(__dirname, './../public')
+const logLevel = process.env.NODE_ENV === 'production' ? 'combined' : 'dev'
 
 app.enable('trust proxy')
 
 app.use(compression())
 app.use(logger(logLevel))
 
-app.options('/api/currentTime', cors())
-app.get('/api/currentTime', cors(), function (req, res) {
-  res.send({
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
+router.get('/currentTime', cors(), (req, res) => {
+  res.status(200).json({
     time: new Date()
   })
 })
+
+app.use('/api', router)
 
 app.use('/', express.static(root, {
   maxage: 31557600
 }))
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   if (req.method === 'GET' && req.accepts('html')) {
     res.header('Cache-Control', 'max-age=60, must-revalidate, private')
     res.sendFile('index.html', {root: root})
@@ -35,6 +43,6 @@ app.use(function (req, res, next) {
   }
 })
 
-app.listen(port, function () {
+app.listen(port, () => {
   console.log('Server running on port %s', port)
 })

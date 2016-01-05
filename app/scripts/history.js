@@ -7,9 +7,13 @@
  * file that was distributed with this source code.
  */
 
-import { createHistory } from 'history'
+ import createBrowserHistory from 'history/lib/createBrowserHistory'
 
-/**
- * @const history
- */
-export default createHistory()
+ /**
+  * This enables HTML5 history API within the react-router.
+  */
+
+ /**
+  * @const history
+  */
+ export default createBrowserHistory()

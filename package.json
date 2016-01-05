@@ -4,77 +4,112 @@
   "description": "Boilerplate for advanced web apps with webpack, babel and lots of goodies.",
   "author": "Magnus Bergman <hello@magnus.sexy>",
   "engines": {
-    "node": "5.0.0",
-    "npm": "3.3.12"
+    "node": "5.3.0",
+    "npm": "3.5.2"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:genesishq/genesis.git"
   },
   "scripts": {
-    "postinstall": "NODE_ENV=production webpack -p --colors --progress",
-    "test": "NODE_ENV=test karma start karma.conf.js --log-level debug --single-run",
+    "postinstall": "better-npm-run build",
+    "test": "npm run lint & better-npm-run test",
     "lint": "standard",
     "clean": "rimraf public",
     "start": "node server",
     "dev": "npm run dev:api & npm run dev:web",
-    "dev:web": "NODE_ENV=dev webpack-dev-server --colors --progress --hot --inline",
-    "dev:api": "PORT=5000 nodemon server -w server",
+    "dev:web": "better-npm-run dev:web",
+    "dev:api": "better-npm-run dev:api",
     "prebuild": "npm run clean -s",
-    "build": "NODE_ENV=production webpack -p --colors --progress"
+    "build": "better-npm-run build"
+  },
+  "betterScripts": {
+    "test": {
+      "command": "karma start",
+      "env": {
+        "NODE_ENV": "test"
+      }
+    },
+    "dev:api": {
+      "command": "nodemon server -w server",
+      "env": {
+        "PORT": 5000
+      }
+    },
+    "dev:web": {
+      "command": "webpack-dev-server --colors --progress --hot --inline",
+      "env": {
+        "NODE_ENV": "dev"
+      }
+    },
+    "build": {
+      "command": "webpack -p --colors --progress",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
   },
   "standard": {
     "parser": "babel-eslint"
   },
   "dependencies": {
-    "autoprefixer": "^6.0.3",
-    "babel-core": "^5.8.33",
-    "babel-eslint": "^4.1.5",
-    "babel-loader": "^5.3.3",
-    "classnames": "^2.2.0",
-    "color": "^0.10.1",
+    "autoprefixer": "^6.2.3",
+    "babel-core": "^6.3.26",
+    "babel-eslint": "^5.0.0-beta6",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-1": "^6.3.13",
+    "better-npm-run": "0.0.5",
+    "body-parser": "^1.14.2",
+    "classnames": "^2.2.2",
     "compression": "^1.6.0",
     "cors": "^2.7.1",
-    "css-loader": "^0.22.0",
-    "csswring": "^4.0.0",
+    "css-loader": "^0.23.1",
+    "csswring": "^4.1.1",
+    "es6-promise": "^3.0.2",
+    "exports-loader": "^0.6.2",
     "express": "^4.13.3",
-    "extract-text-webpack-plugin": "^0.9.0",
-    "file-loader": "^0.8.4",
+    "extract-text-webpack-plugin": "^0.9.1",
+    "file-loader": "^0.8.5",
     "flux": "^2.1.1",
-    "history": "^1.13.0",
-    "html-webpack-plugin": "^1.6.2",
-    "json-loader": "^0.5.3",
-    "karma": "^0.13.14",
-    "karma-chrome-launcher": "^0.2.1",
-    "karma-cli": "0.1.1",
-    "karma-firefox-launcher": "^0.1.6",
-    "karma-mocha": "^0.2.0",
-    "karma-nyan-reporter": "0.2.2",
+    "history": "^1.17.0",
+    "html-webpack-plugin": "^1.7.0",
+    "imports-loader": "^0.6.5",
+    "json-loader": "^0.5.4",
+    "karma": "^0.13.18",
+    "karma-cli": "^0.1.2",
+    "karma-mocha": "^0.2.1",
+    "karma-nyan-reporter": "^0.2.3",
+    "karma-phantomjs-launcher": "^0.2.3",
     "karma-sinon-chai": "^1.1.0",
     "karma-webpack": "^1.7.0",
-    "mocha": "^2.3.3",
+    "mocha": "^2.3.4",
     "morgan": "^1.6.1",
-    "node-sass": "^3.4.1",
-    "nodemon": "^1.8.0",
+    "node-sass": "^3.4.2",
+    "nodemon": "^1.8.1",
     "object-assign": "^4.0.1",
-    "postcss": "^5.0.10",
-    "postcss-loader": "^0.7.0",
-    "radium": "^0.14.3",
+    "phantomjs": "^1.9.19",
+    "phantomjs-polyfill": "0.0.1",
+    "postcss": "^5.0.14",
+    "postcss-loader": "^0.8.0",
     "raw-loader": "^0.5.1",
-    "react": "^0.14.1",
-    "react-addons-transition-group": "^0.14.1",
-    "react-dom": "^0.14.1",
+    "react": "^0.14.5",
+    "react-addons-test-utils": "^0.14.5",
+    "react-addons-transition-group": "^0.14.5",
+    "react-dom": "^0.14.5",
     "react-hot-loader": "^1.3.0",
-    "react-router": "^1.0.0-rc3",
-    "rimraf": "^2.4.3",
+    "react-router": "^1.0.3",
+    "rimraf": "^2.5.0",
     "sanitize.css": "^3.0.0",
-    "sass-loader": "^3.1.1",
-    "standard": "^5.3.1",
+    "sass-loader": "^3.1.2",
+    "standard": "^5.4.1",
     "style-loader": "^0.13.0",
     "svg-loader": "0.0.2",
-    "url-loader": "^0.5.6",
-    "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.12.1"
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0",
+    "whatwg-fetch": "^0.10.1"
   },
   "devDependencies": {},
   "license": "MIT"

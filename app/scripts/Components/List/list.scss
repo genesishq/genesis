@@ -1,0 +1,17 @@
+@import '~utils/__utils';
+
+.item-list {
+  padding: 2em 2em 0;
+
+  @media (max-width: 32em) { padding: 2em 0 0; }
+}
+
+.items {
+  list-style: none;
+
+  margin: 1em 0;
+  padding: 1em 0;
+
+  border-top: 1px solid $color-base;
+  border-bottom: 1px solid $color-base;
+}

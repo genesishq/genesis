@@ -7,16 +7,17 @@
  * file that was distributed with this source code.
  */
 
+require('./todo-app.scss')
+
 import React, { Component } from 'react'
-import Radium from 'radium'
 
-import Store from '../stores'
+import Store from 'stores'
 
-import Intro from './Intro'
-import Form from './Form'
-import List from './List'
-import Controls from './Controls'
-import Footer from './Footer'
+import Intro from 'Components/Intro/Intro'
+import Form from 'Components/Form/Form'
+import List from 'Components/List/List'
+import Controls from 'Components/Controls/Controls'
+import Footer from 'Components/Footer/Footer'
 
 /**
  * Retrieve the current item data from the Store.
@@ -36,7 +37,6 @@ function getState () {
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-@Radium
 export default class TodoApp extends Component {
 
   /**
@@ -91,7 +91,7 @@ export default class TodoApp extends Component {
     const { allItems, areAllComplete } = this.state
 
     return (
-      <main style={styles.base}>
+      <main className='todo-app'>
         <Intro />
         <Form />
         <List allItems={allItems} areAllComplete={areAllComplete} />
@@ -101,23 +101,4 @@ export default class TodoApp extends Component {
     )
   }
 
-}
-
-const fadeIn = Radium.keyframes({
-  from: {opacity: 0},
-  to: {opacity: 1}
-})
-
-const styles = {
-  base: {
-    opacity: 0,
-    animation: `${fadeIn} 200ms linear forwards`,
-
-    padding: '0 20%',
-
-    '@media (max-width: 56em)': { padding: '0 15%' },
-    '@media (max-width: 48em)': { padding: '0 10%' },
-    '@media (max-width: 40em)': { padding: '0 5%' },
-    '@media (max-width: 32em)': { padding: '0 1em' }
-  }
 }

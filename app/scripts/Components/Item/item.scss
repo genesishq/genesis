@@ -1,0 +1,68 @@
+@import '~utils/__utils';
+
+.item {
+  margin: .5em 0;
+}
+
+.checkbox {
+  position: relative;
+
+  padding-left: 2em;
+
+  input {
+    position: absolute;
+    overflow: hidden;
+
+    clip: rect(0 0 0 0);
+    border: 0;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+  }
+
+  .checkbox-faker {
+    position: absolute;
+    top: .2em;
+    left: 0;
+
+    width: 1em;
+    height: 1em;
+
+    border: 1px solid $color-base;
+
+    svg {
+      width: 160%;
+
+      fill: $color-base;
+      background-color: transparent;
+
+      transform: translate(-5%, -30%);
+      transition: opacity 100ms $easeOutCubic;
+    }
+  }
+}
+
+.destroy-button {
+  float: right;
+
+  height: 2em;
+  width: 2em;
+
+  padding: .4em .5em;
+
+  border-radius: 100%;
+
+  border: none;
+  background: $color-bg;
+
+  transition: background 100ms $easeOutCubic;
+
+  &:hover {
+    background: darken($color-bg, 0.05);
+  }
+
+  svg { fill: $color-base; }
+}

@@ -7,10 +7,9 @@
  * file that was distributed with this source code.
  */
 
-import React, { PropTypes, Component } from 'react'
-import Radium from 'radium'
+require('./text-input.scss')
 
-import * as colors from '../utils/colors'
+import React, { PropTypes, Component } from 'react'
 
 /**
  * @const ENTER_KEY_CODE
@@ -22,7 +21,6 @@ const ENTER_KEY_CODE = 13
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-@Radium
 export default class TextInput extends Component {
 
   /**
@@ -116,7 +114,7 @@ export default class TextInput extends Component {
 
     return (
       <input
-        style={styles.base}
+        className='text-input'
         placeholder={placeholder}
         onBlur={this.save.bind(this)}
         onChange={this.onChange.bind(this)}
@@ -126,21 +124,4 @@ export default class TextInput extends Component {
     )
   }
 
-}
-
-const styles = {
-  base: {
-    padding: '.75em 1em',
-    width: '100%',
-
-    color: colors.fontBase,
-    fontWeight: '200',
-
-    margin: '.5em 0',
-
-    backgroundColor: colors.base,
-
-    border: 'none',
-    borderRadius: 0
-  }
 }

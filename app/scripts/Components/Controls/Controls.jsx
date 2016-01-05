@@ -7,19 +7,17 @@
  * file that was distributed with this source code.
  */
 
+require('./controls.scss')
+
 import React, { PropTypes, Component } from 'react'
-import Radium from 'radium'
 
-import * as colors from '../utils/colors'
-
-import Actions from '../Actions/'
+import Actions from 'Actions'
 
 /**
  * This is the Controls component class.
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-@Radium
 export default class Controls extends Component {
 
   /**
@@ -77,7 +75,7 @@ export default class Controls extends Component {
     if (completed > 0) {
       clearCompletedButton = (
         <button
-          style={styles.clearCompletedButton}
+          className='clear-completed-button'
           onClick={this.onClearCompletedClick.bind(this)}>
           Clear completed ({completed})
         </button>
@@ -85,11 +83,11 @@ export default class Controls extends Component {
     }
 
     return (
-      <footer style={styles.base}>
+      <footer className='controls'>
         <p>
           <small>Double click a todo to edit its content.</small>
         </p>
-        <div style={styles.meta}>
+        <div className='meta'>
           <span>
             <strong>{itemsLeft}</strong> {itemsLeft > 1 ? 'items' : 'item'} left
           </span>
@@ -99,27 +97,4 @@ export default class Controls extends Component {
     )
   }
 
-}
-
-const styles = {
-  base: {
-    marginTop: '2em',
-    textAlign: 'center'
-  },
-
-  meta: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: '.6em'
-  },
-
-  clearCompletedButton: {
-    marginLeft: '1em',
-    padding: '.4em 1em',
-
-    border: '1px solid ' + colors.base,
-    boxShadow: 'none',
-    background: 'transparent'
-  }
 }

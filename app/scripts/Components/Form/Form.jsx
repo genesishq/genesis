@@ -7,19 +7,19 @@
  * file that was distributed with this source code.
  */
 
+require('./form.scss')
+
 import React, { Component } from 'react'
-import Radium from 'radium'
 
-import Actions from '../Actions/'
+import Actions from 'Actions'
 
-import TextInput from './TextInput.jsx'
+import TextInput from 'Components/TextInput/TextInput'
 
 /**
  * This is the TodoForm component class.
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-@Radium
 export default class TodoForm extends Component {
 
   /**
@@ -42,16 +42,10 @@ export default class TodoForm extends Component {
    */
   render () {
     return (
-      <header>
-        <h2 style={styles.heading}>Todo</h2>
+      <header className='heading'>
+        <h2>Todo</h2>
         <TextInput placeholder='What needs to be done?' onSave={this.onSave.bind(this)} />
       </header>
     )
-  }
-}
-
-const styles = {
-  heading: {
-    marginBottom: '.2em'
   }
 }

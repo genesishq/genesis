@@ -1,0 +1,16 @@
+@import '~utils/__utils';
+
+.text-input {
+  padding: .75em 1em;
+  width: 100%;
+
+  color: $contrast-color-dark;
+  font-weight: 200;
+
+  margin: .5em 0;
+
+  background-color: $color-base;
+
+  border: none;
+  border-radius: 0;
+}

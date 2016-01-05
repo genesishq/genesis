@@ -1,0 +1,22 @@
+@import '~utils/__utils';
+
+.controls {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: .6em;
+}
+
+.clear-completed-button {
+  margin-left: 1em;
+  padding: .4em 1em;
+
+  border: 1px solid $color-base;
+  box-shadow: none;
+  background: transparent;
+}

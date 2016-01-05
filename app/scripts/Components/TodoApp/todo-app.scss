@@ -1,0 +1,10 @@
+@import '~utils/__utils';
+
+.todo-app {
+  padding: 0 20%;
+
+  @media (max-width: 56em) { padding: 0 15%; }
+  @media (max-width: 48em) { padding: 0 10%; }
+  @media (max-width: 40em) { padding: 0 5%; }
+  @media (max-width: 32em) { padding: 0 1em; }
+}
