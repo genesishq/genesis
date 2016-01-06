@@ -19,9 +19,19 @@
 export const CREATE = 'CREATE'
 
 /**
- * @const COMPLETED
+ * @const TOGGLE_COMPLETED
  */
-export const COMPLETED = 'COMPLETED'
+export const TOGGLE_COMPLETED = 'TOGGLE_COMPLETED'
+
+/**
+ * @const TOGGLE_COMPLETE_ALL
+ */
+export const TOGGLE_COMPLETE_ALL = 'TOGGLE_COMPLETE_ALL'
+
+/**
+ * @const UPDATE
+ */
+export const UPDATE = 'UPDATE'
 
 /**
  * @const DESTROY
@@ -32,18 +42,3 @@ export const DESTROY = 'DESTROY'
  * @const DESTROY_COMPLETED
  */
 export const DESTROY_COMPLETED = 'DESTROY_COMPLETED'
-
-/**
- * @const TOGGLE_COMPLETE_ALL
- */
-export const TOGGLE_COMPLETE_ALL = 'TOGGLE_COMPLETE_ALL'
-
-/**
- * @const UNDO_COMPLETED
- */
-export const UNDO_COMPLETED = 'UNDO_COMPLETED'
-
-/**
- * @const UPDATE_TEXT
- */
-export const UPDATE_TEXT = 'UPDATE_TEXT'

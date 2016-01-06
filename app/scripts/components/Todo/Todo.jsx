@@ -11,10 +11,8 @@ import './todo.scss'
 
 import React, { PropTypes } from 'react'
 
-import { toggleCompleted, updateText, destroy } from 'actions'
-
-import TextInput from 'components/TodoApp/common/TextInput/TextInput'
-import Checkbox from 'components/TodoApp/common/Checkbox/Checkbox'
+import TextInput from '../common/TextInput/TextInput'
+import Checkbox from '../common/Checkbox/Checkbox'
 
 /**
  * This is the Todo component class.
@@ -31,7 +29,10 @@ const Todo = React.createClass({
       id: PropTypes.string,
       text: PropTypes.string,
       completed: PropTypes.bool
-    })
+    }),
+    update: PropTypes.func,
+    destroy: PropTypes.func,
+    toggleCompleted: PropTypes.func
   },
 
   /**
@@ -56,7 +57,7 @@ const Todo = React.createClass({
    * @return {void}
    */
   onToggleCompleted () {
-    const { todo } = this.props
+    const { todo, toggleCompleted } = this.props
 
     toggleCompleted(todo)
   },
@@ -77,9 +78,9 @@ const Todo = React.createClass({
    * @param {string} text
    */
   onSubmit (text) {
-    const { todo } = this.props
+    const { todo, update } = this.props
 
-    updateText(todo.id, text)
+    update(todo.id, text)
 
     this.setState({isEditing: false})
   },
@@ -90,7 +91,7 @@ const Todo = React.createClass({
    * @return {void}
    */
   onDestroy () {
-    const { todo } = this.props
+    const { todo, destroy } = this.props
 
     destroy(todo.id)
   },

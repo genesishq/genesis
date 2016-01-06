@@ -9,7 +9,7 @@
 
 import './checkbox.scss'
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 /**
  * This is the Checkbox component class.
@@ -33,5 +33,11 @@ const Checkbox = ({ checked, text, onChange }) =>
     </span>
     {text}
   </label>
+
+Checkbox.proptypes = {
+  checked: PropTypes.bool,
+  text: PropTypes.string,
+  onChange: PropTypes.func
+}
 
 export default Checkbox

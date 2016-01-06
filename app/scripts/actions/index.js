@@ -7,11 +7,17 @@
  * file that was distributed with this source code.
  */
 
-import dispatcher from '../dispatcher'
-import * as constants from '../constants'
+import {
+  CREATE,
+  UPDATE,
+  TOGGLE_COMPLETED,
+  TOGGLE_COMPLETE_ALL,
+  DESTROY,
+  DESTROY_COMPLETED
+} from 'constants'
 
 /**
- * These are the action methods.
+ * These are actions that triggers the redux reducers.
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
@@ -21,13 +27,13 @@ import * as constants from '../constants'
  *
  * @param {string} text
  *
- * @return {void}
+ * @return {object}
  */
 export function create (text) {
-  dispatcher.dispatch({
-    actionType: constants.CREATE,
+  return {
+    type: CREATE,
     text: text
-  })
+  }
 }
 
 /**
@@ -36,42 +42,14 @@ export function create (text) {
  * @param {number} id
  * @param {string} text
  *
- * @return {void}
+ * @return {object}
  */
-export function updateText (id, text) {
-  dispatcher.dispatch({
-    actionType: constants.UPDATE_TEXT,
+export function update (id, text) {
+  return {
+    type: UPDATE,
     id: id,
     text: text
-  })
-}
-
-/**
- * Toggle whether a single todo is complete.
- *
- * @param {object} todo
- *
- * @return {void}
- */
-export function toggleCompleted (todo) {
-  const { id } = todo
-  const actionType = todo.completed ? constants.UNDO_COMPLETED : constants.COMPLETED
-
-  dispatcher.dispatch({
-    actionType: actionType,
-    id: id
-  })
-}
-
-/**
- * Mark all todos as complete.
- *
- * @return {void}
- */
-export function completeAll () {
-  dispatcher.dispatch({
-    actionType: constants.TOGGLE_COMPLETE_ALL
-  })
+  }
 }
 
 /**
@@ -79,22 +57,49 @@ export function completeAll () {
  *
  * @param {number} id
  *
- * @return {void}
+ * @return {object}
  */
 export function destroy (id) {
-  dispatcher.dispatch({
-    actionType: constants.DESTROY,
+  return {
+    type: DESTROY,
     id: id
-  })
+  }
 }
 
 /**
  * Delete all the completed todos.
  *
- * @return {void}
+ * @return {object}
  */
 export function destroyCompleted () {
-  dispatcher.dispatch({
-    actionType: constants.DESTROY_COMPLETED
-  })
+  return {
+    type: DESTROY_COMPLETED
+  }
+}
+
+/**
+ * Toggle whether a single todo is complete.
+ *
+ * @param {object} todo
+ *
+ * @return {object}
+ */
+export function toggleCompleted (todo) {
+  const { id } = todo
+
+  return {
+    type: TOGGLE_COMPLETED,
+    id: id
+  }
+}
+
+/**
+ * Toggle all todos as complete.
+ *
+ * @return {object}
+ */
+export function toggleCompleteAll () {
+  return {
+    type: TOGGLE_COMPLETE_ALL
+  }
 }

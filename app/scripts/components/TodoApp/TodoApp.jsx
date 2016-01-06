@@ -9,27 +9,25 @@
 
 import './todo-app.scss'
 
-import React from 'react'
+import React, { PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-import store from 'stores'
+import {
+  create,
+  update,
+  destroy,
+  destroyCompleted,
+  toggleCompleted,
+  toggleCompleteAll
+} from 'actions'
 
-import Intro from './Intro/Intro'
-import Form from './Form/Form'
-import TodoList from './TodoList/TodoList'
-import Controls from './Controls/Controls'
-import Footer from './Footer/Footer'
-
-/**
- * Retrieve the current todo data from the store.
- *
- * @return {object}
- */
-function getState () {
-  return {
-    todos: store.getTodos(),
-    areAllCompleted: store.getAreAllCompleted()
-  }
-}
+import Intro from '../Intro/Intro'
+import Form from '../Form/Form'
+import Todo from '../Todo/Todo'
+import TodoList from '../TodoList/TodoList'
+import Controls from '../Controls/Controls'
+import Footer from '../Footer/Footer'
 
 /**
  * This is the TodoApp component class, it operates as a "Controller-View".
@@ -37,81 +35,58 @@ function getState () {
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-const TodoApp = React.createClass({
+const TodoApp = ({todos, create, update, destroy, destroyCompleted, toggleCompleted, toggleCompleteAll}) => {
+  let todoList = null
+  let controls = null
 
-  /**
-   * Initiate and set state for the component.
-   *
-   * @return {object}
-   */
-  getInitialState () {
-    return getState()
-  },
+  if (todos.length) {
+    const total = todos.length
+    const completed = todos.reduce((count, todo) => todo.completed ? count + 1 : count, 0)
+    const areAllCompleted = todos.every(todo => todo.completed)
 
-  /**
-   * Add event listener when component is mounted.
-   *
-   * @return {void}
-   */
-  componentDidMount () {
-    store.addChangeListener(this.onChange)
-  },
-
-  /**
-   * Remove event listener when component will unmount.
-   *
-   * @return {void}
-   */
-  componentWillUnmount () {
-    store.removeChangeListener(this.onChange)
-  },
-
-  /**
-   * Event handler that updates the state when the 'change' event is
-   * triggered from the store.
-   *
-   * @return {void}
-   */
-  onChange () {
-    this.setState(getState())
-  },
-
-  /**
-   * Render react component.
-   *
-   * @return {object}
-   */
-  render () {
-    const { todos, areAllCompleted } = this.state
-
-    let todoList = null
-    let controls = null
-    let completed = 0
-
-    const total = Object.keys(todos).length
-
-    if (total > 0) {
-      for (const key in todos) {
-        if (todos.hasOwnProperty(key) && todos[key].completed) {
-          completed++
-        }
-      }
-
-      todoList = <TodoList todos={todos} areAllCompleted={areAllCompleted} />
-      controls = <Controls total={total} completed={completed} todos={todos} />
-    }
-
-    return (
-      <main className='todo-app'>
-        <Intro />
-        <Form />
-        {todoList}
-        {controls}
-        <Footer />
-      </main>
+    todoList = (
+      <TodoList {...{areAllCompleted, toggleCompleteAll}}>
+        {todos.map(todo =>
+          <Todo
+            key={todo.id}
+            todo={todo}
+            {...{update, destroy, toggleCompleted}} />
+        )}
+      </TodoList>
     )
+
+    controls = <Controls {...{total, completed, destroyCompleted}} />
   }
 
-})
+  return (
+    <main className='todo-app'>
+      <Intro />
+      <Form {...{create}} />
+      {todoList}
+      {controls}
+      <Footer />
+    </main>
+  )
+}
 
-export default TodoApp
+TodoApp.proptypes = {
+  todos: PropTypes.array,
+  create: PropTypes.func,
+  update: PropTypes.func,
+  destroy: PropTypes.func,
+  destroyCompleted: PropTypes.func,
+  toggleCompleted: PropTypes.func,
+  toggleCompleteAll: PropTypes.func
+}
+
+export default connect(
+  state => state,
+  dispatch => bindActionCreators({
+    create,
+    update,
+    destroy,
+    destroyCompleted,
+    toggleCompleted,
+    toggleCompleteAll
+  }, dispatch)
+)(TodoApp)

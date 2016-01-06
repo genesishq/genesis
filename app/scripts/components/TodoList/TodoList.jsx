@@ -9,24 +9,30 @@
 
 import './todo-list.scss'
 
-import React from 'react'
+import React, { PropTypes } from 'react'
 
-import { completeAll } from 'actions'
-
-import Todo from './Todo/Todo'
-import Checkbox from 'components/TodoApp/common/Checkbox/Checkbox'
+import Checkbox from '../common/Checkbox/Checkbox'
 
 /**
  * This is the TodoList component class.
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-const TodoList = ({ todos, areAllCompleted }) =>
+const TodoList = ({ children, areAllCompleted, toggleCompleteAll }) =>
   <section className='todos'>
-    <Checkbox checked={areAllCompleted} text='Toggle all as completed' onChange={completeAll} />
+    <Checkbox
+      checked={areAllCompleted}
+      text='Toggle all as completed'
+      onChange={toggleCompleteAll} />
     <ul className='todo-list'>
-      {Object.keys(todos).map(key => <Todo key={key} todo={todos[key]} />)}
+      {children}
     </ul>
   </section>
+
+TodoList.proptypes = {
+  children: PropTypes.node,
+  areAllCompleted: PropTypes.bool,
+  toggleCompleteAll: PropTypes.func
+}
 
 export default TodoList

@@ -89,11 +89,13 @@ const TextInput = React.createClass({
     const { value } = this.state
     const { onSubmit } = this.props
 
-    onSubmit(value)
+    if (value.trim()) {
+      onSubmit(value)
 
-    this.setState({
-      value: ''
-    })
+      this.setState({
+        value: ''
+      })
+    }
   },
 
   /**

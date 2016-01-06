@@ -9,16 +9,14 @@
 
 import './controls.scss'
 
-import React from 'react'
-
-import { destroyCompleted } from 'actions'
+import React, { PropTypes } from 'react'
 
 /**
  * This is the Controls component.
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-const Controls = ({ total, completed, todos }) => {
+const Controls = ({ total, completed, destroyCompleted }) => {
   const todosLeft = total - completed
 
   let destroyCompletedButton = null
@@ -40,12 +38,18 @@ const Controls = ({ total, completed, todos }) => {
       </p>
       <div className='meta'>
         <span>
-          <strong>{todosLeft}</strong> {todosLeft > 1 ? 'todos' : 'todo'} left
+          <strong>{todosLeft}</strong> {todosLeft === 1 ? 'todo' : 'todos'} left
         </span>
         {destroyCompletedButton}
       </div>
     </section>
   )
+}
+
+Controls.proptypes = {
+  total: PropTypes.number,
+  completed: PropTypes.number,
+  destroyCompleted: PropTypes.func
 }
 
 export default Controls
