@@ -1,5 +1,7 @@
-module.exports = function (config) {
-  config.set({
+'use strict'
+
+module.exports = (karma) =>
+  karma.set({
     basePath: '.',
     frameworks: ['mocha', 'sinon-chai'],
     files: [
@@ -9,16 +11,10 @@ module.exports = function (config) {
       'app/scripts/**/__tests__/*': ['webpack']
     },
     webpack: require('./webpack.config.js'),
+    webpackMiddleware: {
+      noInfo: true
+    },
     singleRun: process.env.TRAVIS_CI === 'true',
-    browsers: [(process.env.TRAVIS_CI === 'true' ? 'Firefox' : 'Chrome')],
-    reporters: ['nyan'],
-    plugins: [
-      require('karma-webpack'),
-      require('karma-mocha'),
-      require('karma-sinon-chai'),
-      require('karma-chrome-launcher'),
-      require('karma-firefox-launcher'),
-      require('karma-nyan-reporter')
-    ]
+    browsers: ['PhantomJS'],
+    reporters: ['nyan']
   })
-}
