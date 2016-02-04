@@ -9,7 +9,7 @@
 
 import './todo-app.scss'
 
-import React from 'react'
+import React, { Component } from 'react'
 
 import store from 'stores'
 
@@ -37,16 +37,22 @@ function getState () {
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-const TodoApp = React.createClass({
+export default class TodoApp extends Component {
 
   /**
-   * Initiate and set state for the component.
+   * Create TodoApp.
    *
-   * @return {object}
+   * @param {object} props
+   *
+   * @return {void}
    */
-  getInitialState () {
-    return getState()
-  },
+  constructor (props) {
+    super(props)
+
+    this.state = getState()
+
+    this.onChange = this.onChange.bind(this)
+  }
 
   /**
    * Add event listener when component is mounted.
@@ -55,7 +61,7 @@ const TodoApp = React.createClass({
    */
   componentDidMount () {
     store.addChangeListener(this.onChange)
-  },
+  }
 
   /**
    * Remove event listener when component will unmount.
@@ -64,7 +70,7 @@ const TodoApp = React.createClass({
    */
   componentWillUnmount () {
     store.removeChangeListener(this.onChange)
-  },
+  }
 
   /**
    * Event handler that updates the state when the 'change' event is
@@ -74,7 +80,7 @@ const TodoApp = React.createClass({
    */
   onChange () {
     this.setState(getState())
-  },
+  }
 
   /**
    * Render react component.
@@ -112,6 +118,4 @@ const TodoApp = React.createClass({
     )
   }
 
-})
-
-export default TodoApp
+}

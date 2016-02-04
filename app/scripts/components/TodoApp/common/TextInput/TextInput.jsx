@@ -9,7 +9,7 @@
 
 import './text-input.scss'
 
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 /**
  * @const ENTER_KEY_CODE
@@ -21,36 +21,28 @@ const ENTER_KEY_CODE = 13
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-const TextInput = React.createClass({
+export default class TextInput extends Component {
 
   /**
-   * Declare component property types.
-   */
-  propTypes: {
-    placeholder: PropTypes.string,
-    onSubmit: PropTypes.func.isRequired,
-    initialValue: PropTypes.string
-  },
-
-  /**
-   * Set default values for component properties.
-   */
-  defaultProps: {},
-
-  /**
-   * Initiate and set state for the component.
+   * Create TextInput.
    *
    * @param {object} props
    *
    * @return {void}
    */
-  getInitialState () {
-    const { initialValue } = this.props
+  constructor (props) {
+    super(props)
 
-    return {
+    const { initialValue } = props
+
+    this.state = {
       value: initialValue || ''
     }
-  },
+
+    this.onChange = this.onChange.bind(this)
+    this.onKeyDown = this.onKeyDown.bind(this)
+    this.submit = this.submit.bind(this)
+  }
 
   /**
    * Event handler that updates the state of the component when the
@@ -64,7 +56,7 @@ const TextInput = React.createClass({
     this.setState({
       value: event.target.value
     })
-  },
+  }
 
   /**
    * Event handler listens for 'keydown' and saves the item if the enter key
@@ -78,7 +70,7 @@ const TextInput = React.createClass({
     if (event.keyCode === ENTER_KEY_CODE) {
       this.submit()
     }
-  },
+  }
 
   /**
    * Event handler that clears the input on blur.
@@ -94,7 +86,7 @@ const TextInput = React.createClass({
     this.setState({
       value: ''
     })
-  },
+  }
 
   /**
    * Render react component.
@@ -116,6 +108,18 @@ const TextInput = React.createClass({
     )
   }
 
-})
+}
 
-export default TextInput
+/**
+ * Declare component property types.
+ */
+TextInput.propTypes = {
+  placeholder: PropTypes.string,
+  onSubmit: PropTypes.func.isRequired,
+  initialValue: PropTypes.string
+}
+
+/**
+ * Set default values for component properties.
+ */
+TextInput.defaultProps = {}

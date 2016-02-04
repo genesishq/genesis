@@ -9,7 +9,7 @@
 
 import './todo.scss'
 
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 import { toggleCompleted, updateText, destroy } from 'actions'
 
@@ -21,34 +21,27 @@ import Checkbox from 'components/TodoApp/common/Checkbox/Checkbox'
  *
  * @author Magnus Bergman <hello@magnus.sexy>
  */
-const Todo = React.createClass({
+export default class Todo extends Component {
 
   /**
-   * Declare component property types.
-   */
-  propTypes: {
-    todo: PropTypes.shape({
-      id: PropTypes.string,
-      text: PropTypes.string,
-      completed: PropTypes.bool
-    })
-  },
-
-  /**
-   * Set default values for component properties.
-   */
-  defaultProps: {},
-
-  /**
-   * Initiate and set state for the component.
+   * Create Todo.
    *
-   * @return {object}
+   * @param {object} props
+   *
+   * @return {void}
    */
-  getInitialState () {
-    return {
+  constructor (props) {
+    super(props)
+
+    this.state = {
       isEditing: false
     }
-  },
+
+    this.onToggleCompleted = this.onToggleCompleted.bind(this)
+    this.onDoubleClick = this.onDoubleClick.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+    this.onDestroy = this.onDestroy.bind(this)
+  }
 
   /**
    * Event handler that toggles the "complete" state of the todo.
@@ -59,7 +52,7 @@ const Todo = React.createClass({
     const { todo } = this.props
 
     toggleCompleted(todo)
-  },
+  }
 
   /**
    * Event handler that triggers edit mode when double clicking the todo.
@@ -68,7 +61,7 @@ const Todo = React.createClass({
    */
   onDoubleClick () {
     this.setState({isEditing: true})
-  },
+  }
 
   /**
    * Event handler passed down to the TextInput component that triggers save
@@ -82,7 +75,7 @@ const Todo = React.createClass({
     updateText(todo.id, text)
 
     this.setState({isEditing: false})
-  },
+  }
 
   /**
    * Event handler that deletes the todo.
@@ -93,7 +86,7 @@ const Todo = React.createClass({
     const { todo } = this.props
 
     destroy(todo.id)
-  },
+  }
 
   /**
    * Render react component.
@@ -135,6 +128,20 @@ const Todo = React.createClass({
     )
   }
 
-})
+}
 
-export default Todo
+/**
+ * Declare component property types.
+ */
+Todo.propTypes = {
+  todo: PropTypes.shape({
+    id: PropTypes.string,
+    text: PropTypes.string,
+    completed: PropTypes.bool
+  })
+}
+
+/**
+ * Set default values for component properties.
+ */
+Todo.defaultProps = {}
